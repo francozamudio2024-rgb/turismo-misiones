@@ -43,20 +43,20 @@
             text-decoration: underline;
         }
 
-        .hero {
-            min-height: 500px;
-            background:
-                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                url('/img/cataratas.jpg') center/cover;
+       .hero {
+    min-height: 500px;
+background-color: red !important;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('<?= base_url('img/fondo.jpg') ?>') center/cover;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 30px;
-        }
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
         .hero-content {
             max-width: 700px;
         }

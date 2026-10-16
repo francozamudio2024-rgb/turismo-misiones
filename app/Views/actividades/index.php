@@ -39,7 +39,7 @@
             color: white;
             background:
                 linear-gradient(#102c24a8, #102c24a8),
-                url("<?= base_url('img/cataratas.jpg') ?>")
+                url("<?= base_url('img/fondo2.jpg') ?>")
                 center/cover;
         }
 
@@ -123,9 +123,32 @@
 </section>
 
 <main>
-    <h2>Nuestras actividades</h2>
-    <p>Elegí tu próxima aventura.</p>
+<h2>Nuestras actividades</h2>
+    <p>Elegí tu próximo destino</p>
 
+    <p>
+        <a href="<?= base_url('actividades/crear') ?>"
+           style="
+               display: inline-block;
+               background: #174c38;
+               color: white;
+               padding: 12px 20px;
+               border-radius: 8px;
+               text-decoration: none;
+               font-weight: bold;
+               margin-bottom: 25px;
+           ">
+            + Agregar actividad
+        </a>
+    </p>
+
+    <div style="text-align: center; margin: 25px;">
+    <a href="<?= base_url('actividades/crear') ?>"
+       style="background: #198754; color: white; padding: 12px 20px;
+              text-decoration: none; border-radius: 8px; font-weight: bold;">
+        + Agregar actividad
+    </a>
+    </div>
     <div class="actividades">
 
         <?php if (!empty($actividades)): ?>
@@ -165,7 +188,24 @@
                         <p class="precio">
                             $<?= number_format((float) $actividad['precios'], 0, ',', '.') ?>
                         </p>
+        <form action="<?= base_url('actividades/eliminar/' . $actividad['id']) ?>"
+             method="post"
+      onsubmit="return confirm('¿Seguro que querés eliminar esta actividad?');">
 
+    <?= csrf_field() ?>
+
+    <button type="submit"
+            style="background: #dc3545; color: white; padding: 10px 16px;
+                   border: none; border-radius: 6px; cursor: pointer;">
+        Eliminar
+    </button>
+    <a href="<?= base_url('actividades/editar/' . $actividad['id']) ?>"
+   style="display:inline-block; background:#198754; color:white;
+          padding:10px 16px; border-radius:6px;
+          text-decoration:none; margin-bottom:10px;">
+    Editar
+    </a>
+</form>
                     </div>
                 </article>
 

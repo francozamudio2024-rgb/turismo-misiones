@@ -17,3 +17,8 @@ $routes->post('actividades/actualizar/(:num)', 'ActividadController::actualizar/
 
 
 $routes->post('actividades/eliminar/(:num)', 'ActividadController::eliminar/$1');
+
+
+$routes->get('reservas', 'ReservaController::index');
+$routes->post('reservas/guardar', 'ReservaController::guardar');
+$routes->post('reservas/eliminar/(:num)', 'ReservaController::eliminar/$1');

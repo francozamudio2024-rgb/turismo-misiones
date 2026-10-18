@@ -15,114 +15,188 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7f5;
+            background: #f5f7f5;
             color: #222;
         }
+
+        /* ---------- ENCABEZADO ---------- */
 
         header {
             background: #174d3c;
             color: white;
-            padding: 20px 8%;
+            padding: 18px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         header h1 {
-            font-size: 26px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
+            font-size: 15px;
             font-weight: bold;
+            transition: opacity 0.2s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            opacity: 0.75;
         }
 
-       .hero {
-    min-height: 500px;
-background-color: red !important;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url('<?= base_url('img/fondo.jpg') ?>') center/cover;
+        /* ---------- HERO ---------- */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    padding: 30px;
-}
+        .hero {
+            min-height: 520px;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
+                url('<?= base_url('img/fondo.jpg') ?>') center/cover;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
         .hero-content {
-            max-width: 700px;
+            max-width: 760px;
         }
 
         .hero h2 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
         .hero p {
-            font-size: 20px;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            font-size: 19px;
+            line-height: 1.7;
+            margin-bottom: 32px;
         }
 
         .boton {
             display: inline-block;
-            background: #d35400;
+            background: #c95d22;
             color: white;
             text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 6px;
+            padding: 13px 27px;
+            border-radius: 5px;
             font-weight: bold;
+            transition: background 0.2s;
         }
 
         .boton:hover {
-            background: #a94300;
+            background: #a94b1b;
         }
 
+        /* ---------- INFORMACION ---------- */
+
         .seccion {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 25px;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 65px 25px;
             text-align: center;
         }
 
         .seccion h2 {
             color: #174d3c;
-            margin-bottom: 15px;
+            font-size: 29px;
+            margin-bottom: 18px;
         }
 
         .seccion p {
-            line-height: 1.7;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.8;
             color: #555;
+            font-size: 16px;
         }
+
+        /* ---------- BLOQUES ---------- */
+
+        .bloques {
+            max-width: 1050px;
+            margin: 0 auto 65px;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .bloque {
+            background: white;
+            padding: 28px 24px;
+            border: 1px solid #e3e8e4;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bloque h3 {
+            color: #174d3c;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .bloque p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* ---------- PIE ---------- */
 
         footer {
             background: #174d3c;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 60px;
+            padding: 24px;
+            margin-top: 20px;
         }
 
-        @media (max-width: 700px) {
+        footer p {
+            font-size: 14px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (max-width: 750px) {
+
             header {
                 flex-direction: column;
                 gap: 15px;
+                padding: 18px 20px;
             }
 
-            nav a {
-                margin: 0 8px;
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 450px;
             }
 
             .hero h2 {
-                font-size: 34px;
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .bloques {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -131,13 +205,17 @@ background-color: red !important;
 <body>
 
     <header>
+
         <h1>Turismo Misiones</h1>
 
         <nav>
             <a href="/">Inicio</a>
             <a href="/actividades">Actividades</a>
+            <a href="/reservas">Reservas</a>
         </nav>
+
     </header>
+
 
     <section class="hero">
 
@@ -158,6 +236,7 @@ background-color: red !important;
 
     </section>
 
+
     <section class="seccion">
 
         <h2>Viví una experiencia diferente</h2>
@@ -170,8 +249,51 @@ background-color: red !important;
 
     </section>
 
+
+    <section class="bloques">
+
+        <div class="bloque">
+
+            <h3>Destinos</h3>
+
+            <p>
+                Conocé algunos de los lugares más destacados
+                de la provincia de Misiones.
+            </p>
+
+        </div>
+
+
+        <div class="bloque">
+
+            <h3>Actividades</h3>
+
+            <p>
+                Explorá diferentes propuestas y experiencias
+                disponibles para los visitantes.
+            </p>
+
+        </div>
+
+
+        <div class="bloque">
+
+            <h3>Reservas</h3>
+
+            <p>
+                Consultá las actividades disponibles y
+                realizá una reserva de forma sencilla.
+            </p>
+
+        </div>
+
+    </section>
+
+
     <footer>
-        Turismo Misiones
+
+        <p>TP Turismo . Franco Zamudio y Lucas Exequiel Castellví</p>
+
     </footer>
 
 </body>

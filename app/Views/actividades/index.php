@@ -1,76 +1,137 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turismo Misiones</title>
+
+    <title>Actividades - Turismo Misiones</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f3f7f2;
-            color: #20352b;
+            background: #f5f7f5;
+            color: #222;
         }
 
+        /* ---------- ENCABEZADO ---------- */
+
         header {
-            background: #174c38;
+            background: #174d3c;
             color: white;
-            padding: 22px 8%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 28px;
+            font-size: 25px;
         }
 
-        header p {
-            margin-bottom: 0;
-            color: #d6eadc;
+        nav {
+            display: flex;
+            gap: 25px;
         }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            opacity: 0.75;
+        }
+
+        /* ---------- PORTADA ---------- */
 
         .portada {
-            padding: 65px 8%;
+            min-height: 350px;
+            padding: 60px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
             color: white;
+
             background:
-                linear-gradient(#102c24a8, #102c24a8),
-                url("<?= base_url('img/fondo2.jpg') ?>")
-                center/cover;
+                linear-gradient(rgba(16, 44, 36, 0.58), rgba(16, 44, 36, 0.58)),
+                url("<?= base_url('img/fondo2.jpg') ?>") center/cover;
         }
 
         .portada h2 {
-            max-width: 650px;
-            font-size: clamp(32px, 5vw, 52px);
-            margin: 0 0 15px;
+            max-width: 700px;
+            font-size: 48px;
+            margin-bottom: 18px;
         }
 
         .portada p {
-            font-size: 18px;
+            font-size: 19px;
+            max-width: 650px;
+            line-height: 1.6;
         }
 
+        /* ---------- CONTENIDO ---------- */
+
         main {
-            max-width: 1200px;
+            max-width: 1150px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 55px 25px 70px;
         }
+
+        .encabezado-actividades {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .encabezado-actividades h2 {
+            color: #174d3c;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .encabezado-actividades p {
+            color: #666;
+        }
+
+        .boton-agregar {
+            display: inline-block;
+            background: #174d3c;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .boton-agregar:hover {
+            background: #123d30;
+        }
+
+        /* ---------- TARJETAS ---------- */
 
         .actividades {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
         .tarjeta {
             background: white;
-            border-radius: 14px;
+            border: 1px solid #e2e7e3;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px #00000012;
         }
 
         .tarjeta img {
@@ -81,31 +142,147 @@
         }
 
         .contenido {
-            padding: 20px;
+            padding: 22px;
         }
 
         .categoria {
+            display: block;
             color: #28744f;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .contenido h3 {
+            color: #174d3c;
+            font-size: 22px;
             margin-bottom: 10px;
         }
 
-        .precio {
-            font-size: 22px;
+        .ubicacion {
+            color: #555;
             font-weight: bold;
-            color: #174c38;
+            margin-bottom: 12px;
         }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #174c38;
+        .descripcion {
+            color: #666;
+            line-height: 1.6;
+            min-height: 75px;
+            margin-bottom: 15px;
+        }
+
+        .cupos {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .precio {
+            font-size: 23px;
+            font-weight: bold;
+            color: #174d3c;
+            margin-bottom: 18px;
+        }
+
+        /* ---------- BOTONES ---------- */
+
+        .acciones {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .boton-editar,
+        .boton-eliminar {
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .boton-editar {
+            background: #174d3c;
             color: white;
+        }
+
+        .boton-editar:hover {
+            background: #123d30;
+        }
+
+        .boton-eliminar {
+            background: #a94442;
+            color: white;
+            border: none;
+        }
+
+        .boton-eliminar:hover {
+            background: #893735;
+        }
+
+        .sin-actividades {
+            background: white;
+            border: 1px solid #e2e7e3;
+            padding: 30px;
+            border-radius: 8px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* ---------- PIE ---------- */
+
+        footer {
+            background: #174d3c;
+            color: white;
+            text-align: center;
+            padding: 24px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 18px 20px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .portada {
+                min-height: 320px;
+                padding: 45px 25px;
+            }
+
+            .portada h2 {
+                font-size: 36px;
+            }
+
+            .portada p {
+                font-size: 17px;
+            }
+
+            .encabezado-actividades {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .boton-agregar {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -113,42 +290,52 @@
 <body>
 
 <header>
+
     <h1>Turismo Misiones</h1>
-    <p>Trabajo Practico</p>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/actividades">Actividades</a>
+        <a href="/reservas">Reservas</a>
+    </nav>
+
 </header>
 
-<section class="portada">
-    <h2>Viví una experiencia única en Misiones</h2>
-    <p>Explorá paisajes increíbles y descubrí nuevos destinos.</p>
-</section>
 
-<main>
-<h2>Nuestras actividades</h2>
-    <p>Elegí tu próximo destino</p>
+<section class="portada">
+
+    <h2>Viví una experiencia única en Misiones</h2>
 
     <p>
-        <a href="<?= base_url('actividades/crear') ?>"
-           style="
-               display: inline-block;
-               background: #174c38;
-               color: white;
-               padding: 12px 20px;
-               border-radius: 8px;
-               text-decoration: none;
-               font-weight: bold;
-               margin-bottom: 25px;
-           ">
-            + Agregar actividad
-        </a>
+        Explorá paisajes, lugares y actividades para disfrutar
+        de la provincia.
     </p>
 
-    <div style="text-align: center; margin: 25px;">
-    <a href="<?= base_url('actividades/crear') ?>"
-       style="background: #198754; color: white; padding: 12px 20px;
-              text-decoration: none; border-radius: 8px; font-weight: bold;">
-        + Agregar actividad
-    </a>
+</section>
+
+
+<main>
+
+    <div class="encabezado-actividades">
+
+        <div>
+            <h2>Nuestras actividades</h2>
+
+            <p>
+                Elegí una propuesta y descubrí nuevos lugares.
+            </p>
+        </div>
+
+        <a
+            href="<?= base_url('actividades/crear') ?>"
+            class="boton-agregar"
+        >
+            + Agregar actividad
+        </a>
+
     </div>
+
+
     <div class="actividades">
 
         <?php if (!empty($actividades)): ?>
@@ -172,15 +359,15 @@
                             <?= esc($actividad['nombre']) ?>
                         </h3>
 
-                        <p>
-                             <?= esc($actividad['ubicacion']) ?>
+                        <p class="ubicacion">
+                            <?= esc($actividad['ubicacion']) ?>
                         </p>
 
-                        <p>
+                        <p class="descripcion">
                             <?= esc($actividad['descripcion']) ?>
                         </p>
 
-                        <p>
+                        <p class="cupos">
                             Cupos disponibles:
                             <?= esc($actividad['cupos']) ?>
                         </p>
@@ -188,40 +375,60 @@
                         <p class="precio">
                             $<?= number_format((float) $actividad['precios'], 0, ',', '.') ?>
                         </p>
-        <form action="<?= base_url('actividades/eliminar/' . $actividad['id']) ?>"
-             method="post"
-      onsubmit="return confirm('¿Seguro que querés eliminar esta actividad?');">
 
-    <?= csrf_field() ?>
+                        <div class="acciones">
 
-    <button type="submit"
-            style="background: #dc3545; color: white; padding: 10px 16px;
-                   border: none; border-radius: 6px; cursor: pointer;">
-        Eliminar
-    </button>
-    <a href="<?= base_url('actividades/editar/' . $actividad['id']) ?>"
-   style="display:inline-block; background:#198754; color:white;
-          padding:10px 16px; border-radius:6px;
-          text-decoration:none; margin-bottom:10px;">
-    Editar
-    </a>
-</form>
+                            <a
+                                href="<?= base_url('actividades/editar/' . $actividad['id']) ?>"
+                                class="boton-editar"
+                            >
+                                Editar
+                            </a>
+
+                            <form
+                                action="<?= base_url('actividades/eliminar/' . $actividad['id']) ?>"
+                                method="post"
+                                onsubmit="return confirm('¿Seguro que querés eliminar esta actividad?');"
+                            >
+
+                                <?= csrf_field() ?>
+
+                                <button
+                                    type="submit"
+                                    class="boton-eliminar"
+                                >
+                                    Eliminar
+                                </button>
+
+                            </form>
+
+                        </div>
+
                     </div>
+
                 </article>
 
             <?php endforeach; ?>
 
         <?php else: ?>
 
-            <p>Todavía no hay actividades publicadas</p>
+            <div class="sin-actividades">
+                <p>Todavía no hay actividades publicadas.</p>
+            </div>
 
         <?php endif; ?>
 
     </div>
+
 </main>
 
+
 <footer>
-    <p>TP Turismo . Franco Zamudio y Lucas Exequiel Castellví </p>
+
+    <p>
+        TP Turismo . Franco Zamudio y Lucas Exequiel Castellví
+    </p>
+
 </footer>
 
 </body>

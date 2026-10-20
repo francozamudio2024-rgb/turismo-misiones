@@ -5,7 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 
 $routes->get('/', 'Home::index');
+$routes->get('atractivos', 'Home::atractivos');
+$routes->get('experiencias', 'Home::experiencias');
+$routes->get('sobre-misiones', 'Home::sobreMisiones');
+$routes->get('info-practica', 'Home::infoPractica');
 
+$routes->get('login', 'Login::index');
+
+// Vista de Login
+$routes->get('login', 'Auth::login');
+
+// Vista actividades
 $routes->get('actividades', 'ActividadController::index');
 
 

@@ -1,0 +1,81 @@
+/* Ajustes específicos para el Hero con la imagen de fondo */
+.hero-section {
+    min-height: 520px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('../img/fondo.jpg') center/cover no-repeat;
+    border-radius: 0 0 50px 50px;
+}
+
+/* Personalización de colores principales */
+.bg-verde-misiones {
+    background-color: #174d3c !important;
+}
+
+.text-verde-misiones {
+    color: #174d3c !important;
+}
+
+.btn-naranja {
+    background-color: #c95d22;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-naranja:hover {
+    background-color: #a94b1b;
+    color: #ffffff;
+}
+
+/* ESTILOS DE LA NAVEGACIÓN */
+.nav-link-custom {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 6px;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: #ffffff;
+}
+
+/* Línea inferior en Hover o Activo */
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0%;
+    height: 3px;
+    background-color: #E6A100;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.nav-link-custom:hover::after,
+.nav-link-custom.active::after {
+    width: 100%;
+}
+
+.nav-link-custom.active {
+    color: #ffffff;
+}
+
+/* Login */
+.btn-verde-misiones {
+    background-color: #006837 !important;
+    border-color: #006837 !important;
+    color: #ffffff !important;
+}
+
+.btn-verde-misiones:hover {
+    background-color: #004d28 !important;
+    border-color: #004d28 !important;
+    color: #ffffff !important;
+}

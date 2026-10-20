@@ -420,16 +420,6 @@
 
     </div>
 
-</main>
-
-
-<footer>
-
-    <p>
-        TP Turismo . Franco Zamudio y Lucas Exequiel Castellví
-    </p>
-
-</footer>
-
-</body>
-</html>
+<?php
+    include("template/footer.php");
+?>

@@ -1,4 +1,3 @@
-```php
 <?php
     $seccion = 'sobre_misiones';
     include("template/header.php");

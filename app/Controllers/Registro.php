@@ -14,17 +14,15 @@ class Registro extends BaseController
     {
         $usuarioModel = new \App\Models\UsuarioModel();
 
-        // Armás el arreglo y encriptás la clave directamente
         $datos = [
             'nombre'   => $this->request->getPost('nombre'),
             'apellido' => $this->request->getPost('apellido'),
             'email'    => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT), //Se encripta la clave
             'rol'      => 'cliente'
         ];
 
-        // Guardás en la base de datos
-        $usuarioModel->insert($datos);
+        $usuarioModel->insert($datos); //se hace un insert en la base de datos
 
         return redirect()->to(base_url('login'))->with('mensaje', '¡Usuario registrado!');
     }

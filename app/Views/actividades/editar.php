@@ -26,7 +26,75 @@
 
         <?= csrf_field() ?>
 
-        <div class="row g-3">
+<<<<<<< HEAD
+               <div class="campos">
+
+            <div class="campo">
+                <label for="nombre">Nombre de la actividad</label>
+                <input type="text" id="nombre" name="nombre"
+                       value="<?= esc($actividad['nombre']) ?>" required>
+            </div>
+
+            <div class="campo">
+                <label for="categoria">Categoría</label>
+                <input type="text" id="categoria" name="categoria"
+                       value="<?= esc($actividad['categoria']) ?>" required>
+            </div>
+
+            <div class="campo">
+                <label for="ubicacion">Ubicación</label>
+                <input type="text" id="ubicacion" name="ubicacion"
+                       value="<?= esc($actividad['ubicacion']) ?>" required>
+            </div>
+
+            <div class="campo">
+                <label for="temporada">Temporada</label>
+                <input type="text" id="temporada" name="temporada"
+                       value="<?= esc($actividad['temporada']) ?>">
+            </div>
+
+            <div class="campo">
+                <label for="cupos">Cupos disponibles</label>
+                <input type="number" id="cupos" name="cupos" min="0"
+                       value="<?= esc($actividad['cupos']) ?>" required>
+            </div>
+
+            <div class="campo">
+                <label for="precios">Precio por persona</label>
+                <input type="number" id="precios" name="precios"
+                       min="0" step="0.01"
+                       value="<?= esc($actividad['precios']) ?>" required>
+            </div>
+
+            <div class="campo campo-completo">
+                <label for="imagen">Imagen de la actividad</label>
+
+                <?php if (!empty($actividad['imagen'])): ?>
+                    <img
+                        src="<?= base_url('img/' . $actividad['imagen']) ?>"
+                        alt="Imagen actual"
+                        style="display:block; width:220px; height:140px; object-fit:cover; border-radius:8px; margin-bottom:12px;"
+                    >
+                <?php endif; ?>
+
+                <input
+                    type="file"
+                    id="imagen"
+                    name="imagen"
+                    accept=".jpg,.jpeg,.png,.webp"
+                >
+
+                <span class="ayuda">
+                    Elegí una foto nueva solo si querés cambiar la actual. Máximo 2 MB.
+                </span>
+            </div>
+
+            <div class="campo campo-completo">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion"
+                          required><?= esc($actividad['descripcion']) ?></textarea>
+            </div>
+>>>>>>> 0a40f93 (actualizar actividades reservas y paginas)
 
             <div class="col-md-6">
                 <label for="nombre" class="form-label fw-bold small" style="color: #344b3c;">

@@ -13,18 +13,23 @@
         </p>
     </div>
 
-    <!-- FORMULARIO -->
-    <form class="bg-white p-4 p-md-5 border rounded-3 shadow-sm" 
-          style="border-color: #e1e6e2 !important;" 
-          action="<?= base_url('actividades/guardar') ?>" 
-          method="post">
+        <form
+            class="formulario"
+            action="<?= base_url('actividades/guardar') ?>"
+            method="post"
+        >
 
         <?= csrf_field() ?>
 
-        <div class="mb-3">
-            <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">Nombre de la actividad</label>
-            <input type="text" class="form-control py-2" id="nombre" name="nombre" required>
-        </div>
+            <div class="campo">
+                <label for="nombre">Nombre de la actividad</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                >
+            </div>
 
         <div class="mb-3">
             <label for="categoria" class="form-label fw-bold small" style="color: #30473a;">Categoría</label>

@@ -1,339 +1,148 @@
+<?php
+    $seccion = 'actividades';
+    include("template/header.php");
+?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar actividad - Turismo Misiones</title>
+<main class="container my-5 px-3 px-md-4" style="max-width: 850px;">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- ENCABEZADO -->
+    <div class="mb-4">
+        <span class="text-uppercase fw-bold small tracking-wider" style="color: #43805f; letter-spacing: 2px;">
+            Gestión de actividades
+        </span>
+        <h1 class="fw-bold my-2" style="color: #174d3c; font-size: clamp(30px, 5vw, 42px);">
+            Editar actividad
+        </h1>
+        <p class="text-secondary mb-0">
+            Actualizá la información del destino o la experiencia turística.
+        </p>
+    </div>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    <!-- FORMULARIO -->
+    <form action="<?= base_url('actividades/actualizar/' . $actividad['id']) ?>" 
+          method="post" 
+          class="bg-white p-4 p-md-5 border rounded-3 shadow-sm" 
+          style="border-color: #e3e9e2 !important;">
 
-        body {
-            margin: 0;
-            font-family: 'DM Sans', sans-serif;
-            background: #f5f7f4;
-            color: #263b30;
-        }
+        <?= csrf_field() ?>
 
-        header {
-            background: #174d3c;
-            color: white;
-            padding: 22px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
+        <div class="row g-3">
 
-        .marca {
-            font-family: 'Playfair Display', serif;
-            font-size: 25px;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-
-        nav {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: #edf5ef;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: #d7b98e;
-        }
-
-        main {
-            max-width: 850px;
-            margin: 48px auto;
-            padding: 0 20px;
-        }
-
-        .encabezado {
-            margin-bottom: 26px;
-        }
-
-        .etiqueta {
-            color: #43805f;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(30px, 5vw, 42px);
-            font-weight: 600;
-            margin: 10px 0;
-            color: #174d3c;
-        }
-
-        .encabezado p {
-            color: #6c786f;
-            font-size: 15px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        form {
-            background: white;
-            padding: 34px;
-            border: 1px solid #e3e9e2;
-            border-radius: 14px;
-            box-shadow: 0 8px 30px #183b2910;
-        }
-
-        .campos {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .campo {
-            min-width: 0;
-        }
-
-        .campo-completo {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #344b3c;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #dce4dc;
-            border-radius: 8px;
-            background: #fcfdfb;
-            color: #263b30;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        input:focus, textarea:focus {
-            border-color: #43805f;
-            box-shadow: 0 0 0 3px #43805f18;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 115px;
-            line-height: 1.6;
-        }
-
-        .ayuda {
-            display: block;
-            margin-top: 6px;
-            color: #818c83;
-            font-size: 12px;
-        }
-
-        .acciones {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 28px;
-            padding-top: 22px;
-            border-top: 1px solid #edf0ec;
-        }
-
-        button, .volver {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px 19px;
-            border-radius: 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        button {
-            border: none;
-            background: #28744f;
-            color: white;
-        }
-
-        button:hover {
-            background: #1d5c3d;
-        }
-
-        .volver {
-            border: 1px solid #dce4dc;
-            background: white;
-            color: #435548;
-        }
-
-        .volver:hover {
-            background: #f2f5f1;
-        }
-
-        footer {
-            padding: 24px 15px;
-            margin-top: 55px;
-            border-top: 1px solid #e1e8df;
-            color: #758176;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 20px;
-            }
-
-            .marca {
-                font-size: 23px;
-            }
-
-            nav {
-                gap: 16px;
-            }
-
-            main {
-                margin: 32px auto;
-            }
-
-            form {
-                padding: 22px 18px;
-            }
-
-            .campos {
-                grid-template-columns: 1fr;
-                gap: 17px;
-            }
-
-            .campo-completo {
-                grid-column: auto;
-            }
-
-            button, .volver {
-                flex: 1;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <div class="marca">Turismo Misiones</div>
-
-        <nav>
-            <a href="<?= base_url('/') ?>">Inicio</a>
-            <a href="<?= base_url('actividades') ?>">Actividades</a>
-            <a href="<?= base_url('reservas') ?>">Reservas</a>
-        </nav>
-    </header>
-
-    <main>
-        <section class="encabezado">
-            <span class="etiqueta">Gestión de actividades</span>
-            <h1>Editar actividad</h1>
-            <p>Actualizá la información del destino o la experiencia turística.</p>
-        </section>
-
-        <form action="<?= base_url('actividades/actualizar/' . $actividad['id']) ?>"
-              method="post">
-
-            <?= csrf_field() ?>
-
-            <div class="campos">
-
-                <div class="campo">
-                    <label for="nombre">Nombre de la actividad</label>
-                    <input type="text" id="nombre" name="nombre"
-                           value="<?= esc($actividad['nombre']) ?>" required>
-                </div>
-
-                <div class="campo">
-                    <label for="categoria">Categoría</label>
-                    <input type="text" id="categoria" name="categoria"
-                           value="<?= esc($actividad['categoria']) ?>" required>
-                </div>
-
-                <div class="campo">
-                    <label for="ubicacion">Ubicación</label>
-                    <input type="text" id="ubicacion" name="ubicacion"
-                           value="<?= esc($actividad['ubicacion']) ?>" required>
-                </div>
-
-                <div class="campo">
-                    <label for="temporada">Temporada</label>
-                    <input type="text" id="temporada" name="temporada"
-                           value="<?= esc($actividad['temporada']) ?>">
-                </div>
-
-                <div class="campo">
-                    <label for="cupos">Cupos disponibles</label>
-                    <input type="number" id="cupos" name="cupos" min="0"
-                           value="<?= esc($actividad['cupos']) ?>" required>
-                </div>
-
-                <div class="campo">
-                    <label for="precios">Precio por persona</label>
-                    <input type="number" id="precios" name="precios"
-                           min="0" step="0.01"
-                           value="<?= esc($actividad['precios']) ?>" required>
-                </div>
-
-                <div class="campo campo-completo">
-                    <label for="imagen">Imagen</label>
-                    <input type="text" id="imagen" name="imagen"
-                           value="<?= esc($actividad['imagen']) ?>">
-                    <span class="ayuda">Ingresá el nombre del archivo de imagen, por ejemplo: cataratas.jpg</span>
-                </div>
-
-                <div class="campo campo-completo">
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" name="descripcion"
-                              required><?= esc($actividad['descripcion']) ?></textarea>
-                </div>
-
+            <div class="col-md-6">
+                <label for="nombre" class="form-label fw-bold small" style="color: #344b3c;">
+                    Nombre de la actividad
+                </label>
+                <input type="text" 
+                       class="form-control py-2" 
+                       id="nombre" 
+                       name="nombre" 
+                       value="<?= esc($actividad['nombre']) ?>" 
+                       required>
             </div>
 
-            <div class="acciones">
-                <button type="submit">Guardar cambios</button>
-
-                <a class="volver" href="<?= base_url('actividades') ?>">
-                    Cancelar
-                </a>
+            <div class="col-md-6">
+                <label for="categoria" class="form-label fw-bold small" style="color: #344b3c;">
+                    Categoría
+                </label>
+                <input type="text" 
+                       class="form-control py-2" 
+                       id="categoria" 
+                       name="categoria" 
+                       value="<?= esc($actividad['categoria']) ?>" 
+                       required>
             </div>
 
-        </form>
-    </main>
+            <div class="col-md-6">
+                <label for="ubicacion" class="form-label fw-bold small" style="color: #344b3c;">
+                    Ubicación
+                </label>
+                <input type="text" 
+                       class="form-control py-2" 
+                       id="ubicacion" 
+                       name="ubicacion" 
+                       value="<?= esc($actividad['ubicacion']) ?>" 
+                       required>
+            </div>
 
-    <footer>
-        <p>TP Turismo · Franco Zamudio y Lucas Exequiel Castellví</p>
-    </footer>
+            <div class="col-md-6">
+                <label for="temporada" class="form-label fw-bold small" style="color: #344b3c;">
+                    Temporada
+                </label>
+                <input type="text" 
+                       class="form-control py-2" 
+                       id="temporada" 
+                       name="temporada" 
+                       value="<?= esc($actividad['temporada']) ?>">
+            </div>
 
-</body>
-</html>
+            <div class="col-md-6">
+                <label for="cupos" class="form-label fw-bold small" style="color: #344b3c;">
+                    Cupos disponibles
+                </label>
+                <input type="number" 
+                       class="form-control py-2" 
+                       id="cupos" 
+                       name="cupos" 
+                       min="0" 
+                       value="<?= esc($actividad['cupos']) ?>" 
+                       required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="precios" class="form-label fw-bold small" style="color: #344b3c;">
+                    Precio por persona
+                </label>
+                <input type="number" 
+                       class="form-control py-2" 
+                       id="precios" 
+                       name="precios" 
+                       min="0" 
+                       step="0.01" 
+                       value="<?= esc($actividad['precios']) ?>" 
+                       required>
+            </div>
+
+            <div class="col-12">
+                <label for="imagen" class="form-label fw-bold small" style="color: #344b3c;">
+                    Imagen
+                </label>
+                <input type="text" 
+                       class="form-control py-2" 
+                       id="imagen" 
+                       name="imagen" 
+                       value="<?= esc($actividad['imagen']) ?>">
+                <div class="form-text small" style="color: #818c83;">
+                    Ingresá el nombre del archivo de imagen, por ejemplo: cataratas.jpg
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="descripcion" class="form-label fw-bold small" style="color: #344b3c;">
+                    Descripción
+                </label>
+                <textarea class="form-control" 
+                          id="descripcion" 
+                          name="descripcion" 
+                          rows="4" 
+                          required><?= esc($actividad['descripcion']) ?></textarea>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row align-items-center gap-2 mt-4 pt-3 border-top">
+            <button type="submit" class="btn text-white fw-bold px-4 py-2 w-100 w-sm-auto" style="background-color: #28744f;">
+                Guardar cambios
+            </button>
+
+            <a href="<?= base_url('actividades') ?>" class="btn border fw-bold px-4 py-2 w-100 w-sm-auto bg-white" style="color: #435548; border-color: #dce4dc !important;">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+
+</main>
+
+<?php
+    include("template/footer.php");
+?>

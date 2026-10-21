@@ -16,7 +16,8 @@
                 <div class="card-body p-4 p-sm-5">
 
                     <!-- Formulario de Login (Solo Estructura Visual) -->
-                    <form action="#" method="POST">
+                    <form action="http://localhost/turismo-misiones/public/login/ingresar" method="POST">
+                        <?= csrf_field() ?>
 
                         <!-- Campo Email -->
                         <div class="mb-3">

@@ -4,7 +4,6 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 
-// Páginas Principales
 $routes->get('/', 'Home::index');
 $routes->get('atractivos', 'Home::atractivos');
 $routes->get('experiencias', 'Home::experiencias');
@@ -33,7 +32,16 @@ $routes->get('actividades/editar/(:num)', 'ActividadController::editar/$1', ['fi
 $routes->post('actividades/actualizar/(:num)', 'ActividadController::actualizar/$1', ['filter' => 'adminAuth']);
 $routes->post('actividades/eliminar/(:num)', 'ActividadController::eliminar/$1', ['filter' => 'adminAuth']);
 
-// Reservas
+
 $routes->get('reservas', 'ReservaController::index', ['filter' => 'auth']);
 $routes->post('reservas/guardar', 'ReservaController::guardar', ['filter' => 'auth']);
 $routes->post('reservas/eliminar/(:num)', 'ReservaController::eliminar/$1', ['filter' => 'auth']);
+
+$routes->get('alojamientos', 'AlojamientoController::index', ['filter' => 'auth']);
+$routes->get('alojamientos/crear', 'AlojamientoController::crear', ['filter' => 'adminAuth']);
+$routes->post('alojamientos/guardar', 'AlojamientoController::guardar', ['filter' => 'adminAuth']);
+$routes->get('alojamientos/editar/(:num)', 'AlojamientoController::editar/$1',['filter' => 'adminAuth']);
+$routes->post('alojamientos/actualizar/(:num)', 'AlojamientoController::actualizar/$1', ['filter' => 'adminAuth']);
+$routes->post('alojamientos/eliminar/(:num)', 'AlojamientoController::eliminar/$1', ['filter' => 'adminAuth']);
+
+$routes->get('alojamientos/detalle/(:num)', 'AlojamientoController::detalle/$1');

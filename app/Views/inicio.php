@@ -2,7 +2,7 @@
     include("template/header.php");
 ?>
 
-    <!-- hero section -->
+    <!-- HERO -->
     <section class="hero-section d-flex align-items-center justify-content-center text-center text-white px-3">
         <div class="container" style="max-width: 760px;">
             <h2 class="display-4 fw-bold mb-3">Descubrí Misiones</h2>
@@ -15,7 +15,7 @@
         </div>
     </section>
 
-    <!-- info general -->
+    <!-- INFORMACIÓN GENERAL -->
     <section class="container py-5 text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -27,7 +27,7 @@
         </div>
     </section>
 
-    <!-- tarjetas -->
+    <!-- BLOQUES DE TARJETAS -->
     <section class="container mb-5">
         <div class="row g-4">
             
@@ -63,7 +63,19 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="card h-100 border-light-subtle shadow-sm text-center p-3">
+                    <div class="card-body">
+                        <h3 class="h4 text-verde-misiones fw-bold card-title mb-3">Alojamientos</h3>
+                        <p class="card-text text-secondary">
+                            Encontrá hoteles, cabañas y hospedajes para disfrutar tu estadía en Misiones.
+                        </p>
+                        <a href="<?= site_url('alojamientos') ?>" class="btn btn-naranja fw-bold mt-2">
+                            Ver alojamientos
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

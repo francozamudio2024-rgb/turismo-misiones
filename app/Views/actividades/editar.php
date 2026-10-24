@@ -5,7 +5,6 @@
 
 <main class="container my-5 px-3 px-md-4" style="max-width: 850px;">
 
-    <!-- ENCABEZADO -->
     <div class="mb-4">
         <span class="text-uppercase fw-bold small tracking-wider" style="color: #43805f; letter-spacing: 2px;">
             Gestión de actividades
@@ -18,7 +17,7 @@
         </p>
     </div>
 
-    <!-- FORMULARIO -->
+    <!-- form -->
     <form action="<?= base_url('actividades/actualizar/' . $actividad['id']) ?>" 
           method="post" 
           enctype="multipart/form-data"

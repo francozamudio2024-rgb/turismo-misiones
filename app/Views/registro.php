@@ -7,7 +7,7 @@
         <div class="col-md-8 col-lg-5">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
                 
-                <!-- Encabezado del login -->
+                <!-- login -->
                 <div class="bg-verde-misiones text-white text-center py-4 px-3" style="background-color: #006837;">
                     <h2 class="h4 fw-bold mb-1">¡Bienvenido a Misiones!</h2>
                     <p class="small text-white-50 mb-0">Crea tu cuenta para gestionar tus reservas y actividades</p>

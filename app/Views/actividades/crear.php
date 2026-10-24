@@ -5,7 +5,6 @@
 
 <main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
-    <!-- ENCABEZADO -->
     <div class="mb-4">
         <h2 class="fw-bold mb-2" style="color: #174d3c; font-size: 30px;">Agregar actividad</h2>
         <p class="text-secondary mb-0" style="line-height: 1.6;">
@@ -13,23 +12,18 @@
         </p>
     </div>
 
-        <form
-            class="formulario"
-            action="<?= base_url('actividades/guardar') ?>"
-            method="post"
-        >
+    <form
+        class="formulario"
+        action="<?= base_url('actividades/guardar') ?>"
+        method="post"
+    >
 
         <?= csrf_field() ?>
 
-            <div class="campo">
-                <label for="nombre">Nombre de la actividad</label>
-                <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    required
-                >
-            </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">Nombre de la actividad</label>
+            <input type="text" class="form-control py-2" id="nombre" name="nombre" required>
+        </div>
 
         <div class="mb-3">
             <label for="categoria" class="form-label fw-bold small" style="color: #30473a;">Categoría</label>

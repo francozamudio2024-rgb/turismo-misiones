@@ -6,6 +6,11 @@ use App\Models\AlojamientoModel;
 
 class AlojamientoController extends BaseController
 {
+    private function esAdmin()
+    {
+        return strtolower((string) session()->get('rol')) === 'admin';
+    }
+
     public function index()
     {
         $modelo = new AlojamientoModel();
@@ -18,11 +23,19 @@ class AlojamientoController extends BaseController
 
     public function crear()
     {
+        if (!$this->esAdmin()) {
+            return redirect()->to('/alojamientos');
+        }
+
         return view('alojamientos/crear');
     }
 
     public function guardar()
     {
+        if (!$this->esAdmin()) {
+            return redirect()->to('/alojamientos');
+        }
+
         $modelo = new AlojamientoModel();
 
         $datos = [
@@ -41,8 +54,16 @@ class AlojamientoController extends BaseController
 
     public function editar($id)
     {
+        if (!$this->esAdmin()) {
+            return redirect()->to('/alojamientos');
+        }
+
         $modelo = new AlojamientoModel();
         $alojamiento = $modelo->find($id);
+
+        if (!$alojamiento) {
+            return redirect()->to('/alojamientos');
+        }
 
         return view('alojamientos/editar', [
             'alojamiento' => $alojamiento
@@ -51,6 +72,10 @@ class AlojamientoController extends BaseController
 
     public function actualizar($id)
     {
+        if (!$this->esAdmin()) {
+            return redirect()->to('/alojamientos');
+        }
+
         $modelo = new AlojamientoModel();
 
         $datos = [
@@ -69,23 +94,27 @@ class AlojamientoController extends BaseController
 
     public function eliminar($id)
     {
+        if (!$this->esAdmin()) {
+            return redirect()->to('/alojamientos');
+        }
+
         $modelo = new AlojamientoModel();
         $modelo->delete($id);
 
         return redirect()->to('/alojamientos');
     }
+
     public function detalle($id)
-{
-    $modelo = new AlojamientoModel();
-    $alojamiento = $modelo->find($id);
+    {
+        $modelo = new AlojamientoModel();
+        $alojamiento = $modelo->find($id);
 
-    if (!$alojamiento) {
-        return redirect()->to('/alojamientos');
+        if (!$alojamiento) {
+            return redirect()->to('/alojamientos');
+        }
+
+        return view('alojamientos/detalle', [
+            'alojamiento' => $alojamiento
+        ]);
     }
-
-    return view('alojamientos/detalle', [
-        'alojamiento' => $alojamiento
-    ]);
 }
-}
-

@@ -178,8 +178,11 @@
         <p>Encontrá un lugar para descansar y disfrutar tu estadía en Misiones.</p>
     </div>
 
-    <a href="<?= base_url('alojamientos/crear') ?>" class="boton">Agregar alojamiento</a>
-
+   <?php if (session()->get('rol') === 'admin'): ?>
+    <a href="<?= base_url('alojamientos/crear') ?>" class="boton">
+        Agregar alojamiento
+    </a>
+<?php endif; ?>
     <?php if (empty($alojamientos)): ?>
 
         <div class="vacio">
@@ -223,20 +226,24 @@
 
 
                         <a href="<?= site_url('alojamientos/detalle/' . $alojamiento['id']) ?>">Ver detalle</a>
-                        <div class="acciones">
+                    <?php if (session()->get('rol') === 'admin'): ?>
 
-                            <a href="<?= base_url('alojamientos/editar/' . $alojamiento['id']) ?>" class="editar">
-                                Editar
-                            </a>
+    <div class="acciones">
 
-                            <form action="<?= base_url('alojamientos/eliminar/' . $alojamiento['id']) ?>" method="POST">
-                                <?= csrf_field() ?>
-                                <button type="submit" class="eliminar">
-                                    Eliminar
-                                </button>
-                            </form>
+        <a href="<?= base_url('alojamientos/editar/' . $alojamiento['id']) ?>" class="editar">
+            Editar
+        </a>
 
-                        </div>
+        <form action="<?= base_url('alojamientos/eliminar/' . $alojamiento['id']) ?>" method="POST">
+            <?= csrf_field() ?>
+            <button type="submit" class="eliminar">
+                Eliminar
+            </button>
+        </form>
+
+    </div>
+
+<?php endif; ?>
 
                     </div>
                 </div>

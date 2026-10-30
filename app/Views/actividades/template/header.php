@@ -88,12 +88,13 @@
                                     </a>
                                 </li>
 
-                                <!-- Opción: Mis Reservas -->
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="<?= base_url('reservas') ?>">
-                                        <i class="bi bi-journal-check"></i> Mis Reservas
-                                    </a>
-                                </li>
+                          <?php if (session()->get('rol') === 'cliente'): ?>
+                         <li>
+                       <a class="dropdown-item d-flex align-items-center gap-2" href="<?= base_url('reservas') ?>">
+                      <i class="bi bi-journal-check"></i> Mis Reservas
+        </a>
+    </li>
+<?php endif; ?>
 
                                 <!-- Opción exclusiva para Administrador -->
                                 <?php if (session()->get('rol') === 'admin'): ?>

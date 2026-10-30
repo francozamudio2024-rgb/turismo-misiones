@@ -87,10 +87,11 @@
                             <!-- Botones de Acción -->
                             <div class="d-flex gap-2 mt-auto pt-2 border-top">
                                 
-                                <!-- Botón Reservar para clientes/visitantes -->
-                                <a href="<?= base_url('reservas') ?>" class="btn btn-outline-success btn-sm w-100 fw-bold">
-                                    Reservar
-                                </a>
+                        <?php if (session()->get('rol') === 'cliente'): ?>
+                          <a href="<?= base_url('reservas') ?>" class="btn btn-outline-success btn-sm w-100 fw-bold">
+                          Reservar
+                            </a>
+                        <?php endif; ?>
 
                                 <!-- Opciones exclusivas de edición/eliminación para Administradores -->
                                 <?php if (session()->get('rol') === 'admin'): ?>

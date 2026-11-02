@@ -1,8 +1,8 @@
 <?php
-    include("template/header.php");
+    include(APPPATH . 'Views/template/header.php');
 ?>
 
-    <!-- HERO -->
+    <!-- hero section -->
     <section class="hero-section d-flex align-items-center justify-content-center text-center text-white px-3">
         <div class="container" style="max-width: 760px;">
             <h2 class="display-4 fw-bold mb-3">Descubrí Misiones</h2>
@@ -15,7 +15,6 @@
         </div>
     </section>
 
-    <!-- INFORMACIÓN GENERAL -->
     <section class="container py-5 text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -27,7 +26,7 @@
         </div>
     </section>
 
-    <!-- BLOQUES DE TARJETAS -->
+    <!-- tarjetas -->
     <section class="container mb-5">
         <div class="row g-4">
             
@@ -80,5 +79,5 @@
     </section>
 
 <?php
-    include("template/footer.php");
+    include(APPPATH . 'Views/template/footer.php');
 ?>

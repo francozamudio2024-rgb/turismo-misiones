@@ -7,31 +7,31 @@ class Home extends BaseController
     public function index(): string
     {
         $data['seccion'] = 'inicio';
-        return view('inicio', $data);
+        return view('home/inicio', $data);
     }
 
     public function atractivos(): string
     {
         $data['seccion'] = 'atractivos'; // guardo en &data la vista en la quue estoy para colocar la selección
-        return view('atractivos', $data);
+        return view('home/atractivos', $data);
     }
 
     public function experiencias(): string
     {
         $data['seccion'] = 'experiencias';
-        return view('experiencias', $data);
+        return view('home/experiencias', $data);
     }
 
     public function sobreMisiones(): string
     {
         $data['seccion'] = 'sobre_misiones';
-        return view('sobre_misiones', $data);
+        return view('home/sobre_misiones', $data);
     }
 
     public function infoPractica(): string
     {
         $data['seccion'] = 'info_practica';
-        return view('info_practica', $data);
+        return view('home/info_practica', $data);
     }
 
 }

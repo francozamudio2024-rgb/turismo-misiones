@@ -9,7 +9,7 @@ class Login extends BaseController
     public function index(): string
     {
         $data['seccion'] = 'login';
-        return view('login', $data);
+        return view('autenticacion/login', $data);
     }
 
     public function ingresar()

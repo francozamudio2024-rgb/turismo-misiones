@@ -7,7 +7,7 @@ class Registro extends BaseController
     public function index(): string
     {
         $data['seccion'] = 'registro';
-        return view('registro', $data);
+        return view('autenticacion/registro', $data);
     }
 
     public function guardar()

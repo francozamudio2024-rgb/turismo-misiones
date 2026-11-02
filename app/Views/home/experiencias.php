@@ -1,6 +1,6 @@
 <?php
     $seccion = 'experiencias';
-    include("template/header.php");
+    include(APPPATH . 'Views/template/header.php');
 ?>
 
 <style>
@@ -492,5 +492,5 @@
 </div>
 
 <?php
-    include("template/footer.php");
+    include(APPPATH . 'Views/template/footer.php');
 ?>

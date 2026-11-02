@@ -1,5 +1,5 @@
 <?php
-    include("template/header.php");
+    include(APPPATH . 'Views/template/header.php');
 ?>
 
 <section class="container py-5 d-flex align-items-center justify-content-center" style="min-height: 75vh;">
@@ -102,5 +102,5 @@
 </section>
 
 <?php
-    include("template/footer.php");
+    include(APPPATH . 'Views/template/footer.php'); 
 ?>

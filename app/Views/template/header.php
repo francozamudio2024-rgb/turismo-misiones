@@ -32,25 +32,56 @@
                 <div class="col-xl-7 mb-3 mb-xl-0 d-flex justify-content-center">
                     <nav class="d-flex gap-3 gap-xxl-4 flex-wrap justify-content-center">
         
-                        <a href="<?= base_url('/') ?>" class="nav-link-custom <?php if ($seccion == 'inicio'): ?>active<?php endif; ?>">
-                            Página Principal
-                        </a>
+                        <?php if (session()->get('rol') === 'admin'): ?>
+                            <a href="<?= base_url('actividades/crear') ?>" class="nav-link-custom <?php if ($seccion == 'actividad'): ?>active<?php endif; ?>">
+                                Agregar actividad
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= base_url('/') ?>" class="nav-link-custom <?php if ($seccion == 'inicio'): ?>active<?php endif; ?>">
+                                Página Principal
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="<?= base_url('atractivos') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
-                            Destinos y Atractivos
-                        </a>
+                        <?php if (session()->get('rol') === 'admin'): ?>
+                            <a href="<?= base_url('actividades') ?>" class="nav-link-custom <?php if ($seccion == 'actividad'): ?>active<?php endif; ?>">
+                                Administrar actividades
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= base_url('atractivos') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
+                                Destinos y Atractivos
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="<?= base_url('experiencias') ?>" class="nav-link-custom <?php if ($seccion == 'experiencias'): ?>active<?php endif; ?>">
-                            Gastronomía y Aventura
-                        </a>
+                        <?php if (session()->get('rol') === 'admin'): ?>
+                            <a href="<?= base_url('alojamientos/crear') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
+                                Agregar alojamientos
+                            </a>
+                            
+                        <?php else: ?>
+                            <a href="<?= base_url('experiencias') ?>" class="nav-link-custom <?php if ($seccion == 'experiencias'): ?>active<?php endif; ?>">
+                                Gastronomía y Aventura
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="<?= base_url('sobre-misiones') ?>" class="nav-link-custom <?php if ($seccion == 'sobre_misiones'): ?>active<?php endif; ?>">
-                            Cultura y Geografía
-                        </a>
+                        <?php if (session()->get('rol') === 'admin'): ?>
+                            <a href="<?= base_url('alojamientos') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
+                                Administrar alojamientos
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= base_url('sobre-misiones') ?>" class="nav-link-custom <?php if ($seccion == 'sobre_misiones'): ?>active<?php endif; ?>">
+                                Cultura y Geografía
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="<?= base_url('info-practica') ?>" class="nav-link-custom <?php if ($seccion == 'info_practica'): ?>active<?php endif; ?>">
-                            Guía al Viajero
-                        </a>
+                        <?php if (session()->get('rol') === 'admin'): ?>
+                            <a href="<?= base_url('reservas') ?>" class="nav-link-custom <?php if ($seccion == 'experiencias'): ?>active<?php endif; ?>">
+                                Administrar reservas
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= base_url('info-practica') ?>" class="nav-link-custom <?php if ($seccion == 'info_practica'): ?>active<?php endif; ?>">
+                                Guía al Viajero
+                            </a>
+                        <?php endif; ?>
 
                     </nav>
                 </div>

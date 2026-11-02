@@ -1,9 +1,9 @@
 <?php
     $seccion = 'actividades';
-    include("template/header.php");
+    include(APPPATH . 'Views/template/header.php');
 ?>
 
-<!-- PORTADA / HERO SECTION -->
+<!-- hero section -->
 <section class="position-relative text-white py-5 d-flex align-items-center" 
          style="min-height: 350px; background: linear-gradient(rgba(16, 44, 36, 0.65), rgba(16, 44, 36, 0.65)), url('<?= base_url('img/fondo2.jpg') ?>') center/cover no-repeat;">
     <div class="container px-4 px-lg-5">
@@ -18,10 +18,8 @@
     </div>
 </section>
 
-<!-- CONTENIDO PRINCIPAL -->
 <main class="container my-5 px-4 px-lg-5">
 
-    <!-- ENCABEZADO DE ACTIVIDADES -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
         <div>
             <h2 class="fw-bold text-success mb-1" style="color: #174d3c !important;">Nuestras actividades</h2>
@@ -36,7 +34,7 @@
         <?php endif; ?>
     </div>
 
-    <!-- TARJETAS / GRID DE ACTIVIDADES -->
+    <!-- grid de actividades-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
         <?php if (!empty($actividades)): ?>
@@ -136,5 +134,5 @@
 </main>
 
 <?php
-    include("template/footer.php");
+    include(APPPATH . 'Views/template/footer.php');
 ?>

@@ -1,251 +1,115 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alojamientos - Turismo Misiones</title>
+<?php
+    $seccion = 'actividades';
+    include(APPPATH . 'Views/template/header.php');
+?>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<main class="container my-5 px-3 px-md-4" style="max-width: 1200px;">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f3;
-            color: #26352b;
-        }
-
-        header {
-            background: #173f2a;
-            padding: 22px 40px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 27px;
-        }
-
-        .volver {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .contenedor {
-            max-width: 1200px;
-            margin: 45px auto;
-            padding: 0 25px;
-        }
-
-        .titulo {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .titulo h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .titulo p {
-            color: #68736b;
-            font-size: 17px;
-        }
-
-        .boton {
-            display: inline-block;
-            background: #286b46;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-        }
-
-        .card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-        }
-
-        .sin-imagen {
-            height: 210px;
-            background: #dce5df;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #637068;
-        }
-
-        .contenido {
-            padding: 22px;
-        }
-
-        .contenido h3 {
-            margin-top: 0;
-            font-size: 23px;
-        }
-
-        .tipo {
-            color: #286b46;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .ubicacion {
-            color: #657068;
-            margin-bottom: 12px;
-        }
-
-        .precio {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .descripcion {
-            color: #59635d;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .acciones {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .acciones a,
-        .acciones button {
-            border: none;
-            padding: 9px 13px;
-            border-radius: 7px;
-            text-decoration: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .editar {
-            background: #e8b84a;
-            color: #2d2819;
-        }
-
-        .eliminar {
-            background: #b63d3d;
-            color: white;
-        }
-
-        .vacio {
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <h1>Turismo Misiones</h1>
-    <a href="<?= base_url('/') ?>" class="volver">Volver al inicio</a>
-</header>
-
-<div class="contenedor">
-
-    <div class="titulo">
-        <h2>Alojamientos</h2>
-        <p>Encontrá un lugar para descansar y disfrutar tu estadía en Misiones.</p>
+    <div class="text-center mb-4">
+        <h2 class="display-5 fw-bold mb-2" style="font-family: Georgia, serif; color: #174d3c;">
+            Alojamientos
+        </h2>
+        <p class="text-secondary fs-5 mb-0" style="max-width: 700px; margin: auto;">
+            Encontrá un lugar para descansar y disfrutar tu estadía en Misiones.
+        </p>
     </div>
 
-   <?php if (session()->get('rol') === 'admin'): ?>
-    <a href="<?= base_url('alojamientos/crear') ?>" class="boton">
-        Agregar alojamiento
-    </a>
-<?php endif; ?>
+    <!-- boton agregar del admin) -->
+    <?php if (session()->get('rol') === 'admin'): ?>
+        <div class="mb-4">
+            <a href="<?= base_url('alojamientos/crear') ?>" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #286b46;">
+                + Agregar alojamiento
+            </a>
+        </div>
+    <?php endif; ?>
+
     <?php if (empty($alojamientos)): ?>
 
-        <div class="vacio">
-            <h3>Todavía no hay alojamientos</h3>
-            <p>Agregá el primero para comenzar a completar el catálogo.</p>
+        <div class="card border-0 shadow-sm rounded-4 p-5 text-center bg-white my-4">
+            <h3 class="h4 fw-bold mb-2" style="font-family: Georgia, serif; color: #174d3c;">
+                Todavía no hay alojamientos
+            </h3>
+            <p class="text-secondary mb-0">
+                Agregá el primero para comenzar a completar el catálogo.
+            </p>
         </div>
 
     <?php else: ?>
 
-        <div class="grid">
+        <!--grid-->
+        <div class="row g-4">
 
             <?php foreach ($alojamientos as $alojamiento): ?>
 
-                <div class="card">
+                <div class="col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-white">
 
-                    <?php if (!empty($alojamiento['imagen'])): ?>
-                        <img src="<?= base_url('img/' . $alojamiento['imagen']) ?>" alt="<?= esc($alojamiento['nombre']) ?>">
-                    <?php else: ?>
-                        <div class="sin-imagen">Sin imagen</div>
-                    <?php endif; ?>
+                        <?php if (!empty($alojamiento['imagen'])): ?>
+                            <img src="<?= base_url('img/alojamientos/' . $alojamiento['imagen']) ?>"
+                                 alt="<?= esc($alojamiento['nombre']) ?>" 
+                                 class="card-img-top object-fit-cover" 
+                                 style="height: 210px;">
+                        <?php else: ?>
+                            <div class="d-flex align-items-center justify-content-center bg-secondary-subtle text-secondary fw-bold" 
+                                 style="height: 210px;">
+                                Sin imagen
+                            </div>
+                        <?php endif; ?>
 
-                    <div class="contenido">
+                        <div class="card-body p-4 d-flex flex-column">
 
-                        <h3><?= esc($alojamiento['nombre']) ?></h3>
+                            <h3 class="h4 fw-bold mb-2" style="color: #174d3c;">
+                                <?= esc($alojamiento['nombre']) ?>
+                            </h3>
 
-                        <div class="tipo">
-                            <?= esc($alojamiento['tipo']) ?>
+                            <div class="fw-bold small text-uppercase mb-1" style="color: #286b46; letter-spacing: 0.5px;">
+                                <?= esc($alojamiento['tipo']) ?>
+                            </div>
+
+                            <div class="text-secondary small mb-2">
+                                📍 <?= esc($alojamiento['ubicacion']) ?>
+                            </div>
+
+                            <div class="fs-4 fw-bold mb-3" style="color: #174d3c;">
+                                $<?= number_format((float)$alojamiento['precios'], 2, ',', '.') ?>
+                            </div>
+
+                            <p class="card-text text-secondary small mb-4" style="line-height: 1.6;">
+                                <?= esc($alojamiento['descripcion']) ?>
+                            </p>
+
+                            <!-- botones detalles y editar del admin -->
+                            <div class="mt-auto pt-3 border-top d-flex flex-column gap-2">
+
+                                <a href="<?= site_url('alojamientos/detalle/' . $alojamiento['id']) ?>" 
+                                   class="btn btn-outline-success fw-bold w-100 py-2 rounded-3" 
+                                   style="color: #174d3c; border-color: #286b46;">
+                                    Ver detalle
+                                </a>
+
+                                <?php if (session()->get('rol') === 'admin'): ?>
+                                    <div class="d-flex gap-2 mt-1">
+                                        <a href="<?= base_url('alojamientos/editar/' . $alojamiento['id']) ?>" 
+                                           class="btn btn-warning fw-bold flex-grow-1 py-2 rounded-3 text-dark">
+                                            Editar
+                                        </a>
+
+                                        <form action="<?= base_url('alojamientos/eliminar/' . $alojamiento['id']) ?>" 
+                                              method="POST" 
+                                              class="flex-grow-1"
+                                              onsubmit="return confirm('¿Eliminar este alojamiento?');">
+                                            <?= csrf_field() ?>
+                                            <button type="submit" class="btn btn-danger fw-bold w-100 py-2 rounded-3">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
                         </div>
-
-                        <div class="ubicacion">
-                            <?= esc($alojamiento['ubicacion']) ?>
-                        </div>
-
-                        <div class="precio">
-                            $<?= number_format($alojamiento['precios'], 2, ',', '.') ?>
-                        </div>
-
-                        <div class="descripcion">
-                            <?= esc($alojamiento['descripcion']) ?>
-                        </div>
-
-
-                        <a href="<?= site_url('alojamientos/detalle/' . $alojamiento['id']) ?>">Ver detalle</a>
-                    <?php if (session()->get('rol') === 'admin'): ?>
-
-    <div class="acciones">
-
-        <a href="<?= base_url('alojamientos/editar/' . $alojamiento['id']) ?>" class="editar">
-            Editar
-        </a>
-
-        <form action="<?= base_url('alojamientos/eliminar/' . $alojamiento['id']) ?>" method="POST">
-            <?= csrf_field() ?>
-            <button type="submit" class="eliminar">
-                Eliminar
-            </button>
-        </form>
-
-    </div>
-
-<?php endif; ?>
-
-                    </div>
+                    </article>
                 </div>
 
             <?php endforeach; ?>
@@ -254,7 +118,8 @@
 
     <?php endif; ?>
 
-</div>
+</main>
 
-</body>
-</html>
+<?php
+    include(APPPATH . 'Views/template/footer.php');
+?>

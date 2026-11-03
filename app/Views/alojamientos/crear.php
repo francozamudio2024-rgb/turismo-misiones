@@ -1,151 +1,95 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar alojamiento - Turismo Misiones</title>
+<?= view('template/header', ['seccion' => 'alojamientos']) ?>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f1f4f0;
-            color: #26352b;
-        }
+    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
 
-        header {
-            background: #173f2a;
-            padding: 22px 40px;
-            color: white;
-        }
+        <h2 class="display-6 fw-bold mb-1" style="font-family: Georgia, serif; color: #174d3c;">
+            Agregar alojamiento
+        </h2>
+        <p class="text-secondary mb-4 pb-2" style="line-height: 1.6;">
+            Completá los datos del lugar que querés incorporar al catálogo.
+        </p>
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-        }
-
-        .contenedor {
-            max-width: 760px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .formulario {
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 6px 22px rgba(0,0,0,0.08);
-        }
-
-        h2 {
-            margin-top: 0;
-            font-size: 30px;
-        }
-
-        .subtitulo {
-            color: #68736b;
-            margin-bottom: 28px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin: 18px 0 8px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd5ce;
-            border-radius: 7px;
-            font: inherit;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .botones {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        button, .volver {
-            border: none;
-            border-radius: 7px;
-            padding: 12px 18px;
-            font: inherit;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        button {
-            background: #286b46;
-            color: white;
-        }
-
-        .volver {
-            background: #e7ece8;
-            color: #26352b;
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <h1>Turismo Misiones</h1>
-</header>
-
-<div class="contenedor">
-    <div class="formulario">
-        <h2>Agregar alojamiento</h2>
-        <p class="subtitulo">Completá los datos del lugar que querés incorporar al catálogo.</p>
-
-        <form action="<?= site_url('alojamientos/guardar') ?>" method="POST">
+        <!--form -->
+        <form action="<?= site_url('alojamientos/guardar') ?>" method="POST" enctype="multipart/form-data">
             <?= csrf_field() ?>
 
-            <label for="nombre">Nombre del alojamiento</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="tipo">Tipo de alojamiento</label>
-            <select id="tipo" name="tipo" required>
-                <option value="">Seleccioná una opción</option>
-                <option value="Hotel">Hotel</option>
-                <option value="Cabaña">Cabaña</option>
-                <option value="Hostería">Hostería</option>
-                <option value="Hostel">Hostel</option>
-                <option value="Apart hotel">Apart hotel</option>
-                <option value="Camping">Camping</option>
-            </select>
-
-            <label for="ubicacion">Ubicación</label>
-            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Puerto Iguazú, Misiones" required>
-
-            <label for="precios">Precio por noche ($)</label>
-            <input type="number" id="precios" name="precios" min="0" step="0.01" required>
-
-            <label for="imagen">Nombre del archivo de imagen</label>
-            <input type="text" id="imagen" name="imagen" placeholder="Ej. hotel.jpg">
-
-            <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" placeholder="Describí el alojamiento y sus servicios"></textarea>
-
-            <div class="botones">
-                <button type="submit">Guardar alojamiento</button>
-                <a href="<?= site_url('alojamientos') ?>" class="volver">Cancelar</a>
+            <!-- nombre del alojamiento -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">
+                    Nombre del alojamiento
+                </label>
+                <input type="text" class="form-control py-2" id="nombre" name="nombre" required>
             </div>
-        </form>
-    </div>
-</div>
 
-</body>
-</html>
+            <!-- Tipo de alojamiento -->
+            <div class="mb-3">
+                <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
+                    Tipo de alojamiento
+                </label>
+                <select class="form-select py-2" id="tipo" name="tipo" required>
+                    <option value="" selected disabled>Seleccioná una opción</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Cabaña">Cabaña</option>
+                    <option value="Hostería">Hostería</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Apart hotel">Apart hotel</option>
+                    <option value="Camping">Camping</option>
+                </select>
+            </div>
+
+            <!-- ubicacion -->
+            <div class="mb-3">
+                <label for="ubicacion" class="form-label fw-bold small" style="color: #30473a;">
+                    Ubicación
+                </label>
+                <input type="text" class="form-control py-2" id="ubicacion" name="ubicacion" placeholder="Ej. Puerto Iguazú, Misiones" required>
+            </div>
+
+            <!-- precio -->
+            <div class="mb-3">
+                <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
+                    Precio por noche ($)
+                </label>
+                <input type="number" class="form-control py-2" id="precios" name="precios" min="0" step="0.01" required>
+            </div>
+
+            <!-- form del imagen -->
+            <div class="mb-3">
+                <label for="imagen" class="form-label fw-bold small" style="color: #30473a;">
+                    Imagen del alojamiento
+                </label>
+                <input 
+                    type="file" 
+                    class="form-control py-2" 
+                    id="imagen" 
+                    name="imagen" 
+                    accept="image/*"
+                >
+            </div>
+
+            <!-- descripcion -->
+            <div class="mb-4">
+                <label for="descripcion" class="form-label fw-bold small" style="color: #30473a;">
+                    Descripción
+                </label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describí el alojamiento y sus servicios"></textarea>
+            </div>
+
+            <div class="d-flex gap-2 pt-2">
+                <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #286b46;">
+                    Guardar alojamiento
+                </button>
+                <a href="<?= site_url('alojamientos') ?>" class="btn btn-light text-dark fw-bold px-4 py-2 rounded-3 border">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+<?= view('template/footer') ?>

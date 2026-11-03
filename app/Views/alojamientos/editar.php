@@ -1,38 +1,150 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar alojamiento</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: Arial, sans-serif; background: #f1f4f0; color: #26352b; }
-        header { background: #173f2a; color: white; padding: 22px 40px; }
-        .contenedor { max-width: 700px; margin: 40px auto; padding: 25px; background: white; border-radius: 14px; }
-        label { display: block; margin: 16px 0 7px; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 11px; border: 1px solid #ccd5ce; border-radius: 7px; font: inherit; }
-        textarea { min-height: 100px; }
-        button, .volver { display: inline-block; margin-top: 22px; padding: 12px 17px; border: 0; border-radius: 7px; background: #286b46; color: white; text-decoration: none; cursor: pointer; font-weight: bold; }
-        .volver { background: #e7ece8; color: #26352b; margin-left: 8px; }
-    </style>
-</head>
-<body>
-<header><h1>Turismo Misiones</h1></header>
+<?php
+    $seccion = 'actividades';
+    include(APPPATH . 'Views/template/header.php');
+?>
 
-<div class="contenedor">
-    <h2>Editar alojamiento</h2>
+<main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
-    <form action="<?= site_url('alojamientos/actualizar/' . $alojamiento['id']) ?>" method="POST">
-        <?= csrf_field() ?>
+    <!-- tarheta del form -->
+    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
 
-        <label>Nombre</label>
-        <input type="text" name="nombre" value="<?= esc($alojamiento['nombre']) ?>" required>
+        <h2 class="display-6 fw-bold mb-1" style="font-family: Georgia, serif; color: #174d3c;">
+            Editar alojamiento
+        </h2>
+        <p class="text-secondary mb-4 pb-2" style="line-height: 1.6;">
+            Modificá los datos del alojamiento en el catálogo.
+        </p>
 
-        <label>Tipo</label>
-        <input type="text" name="tipo" value="<?= esc($alojamiento['tipo']) ?>" required>
+        <!-- form -->
+        <form action="<?= site_url('alojamientos/actualizar/' . $alojamiento['id']) ?>" method="POST" enctype="multipart/form-data">
+            <?= csrf_field() ?>
 
-        <label>Ubicación</label>
-        <input type="text" name="ubicacion" value="<?= esc($alojamiento['ubicacion']) ?>" required>
+            <!-- nombre del alojamiento -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">
+                    Nombre del alojamiento
+                </label>
+                <input 
+                    type="text" 
+                    class="form-control py-2" 
+                    id="nombre" 
+                    name="nombre" 
+                    value="<?= esc($alojamiento['nombre']) ?>" 
+                    required
+                >
+            </div>
 
-        <label>Precio por noche</label>
-       
+            <!-- tipo de alojamiento -->
+            <div class="mb-3">
+                <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
+                    Tipo de alojamiento
+                </label>
+                <select class="form-select py-2" id="tipo" name="tipo" required>
+                    <?php 
+                    $tipos = ['Hotel', 'Cabaña', 'Hostería', 'Hostel', 'Apart hotel', 'Camping'];
+                    foreach ($tipos as $tipoOption): 
+                    ?>
+                        <option value="<?= $tipoOption ?>" <?= ($alojamiento['tipo'] === $tipoOption) ? 'selected' : '' ?>>
+                            <?= $tipoOption ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- ubicacion -->
+            <div class="mb-3">
+                <label for="ubicacion" class="form-label fw-bold small" style="color: #30473a;">
+                    Ubicación
+                </label>
+                <input 
+                    type="text" 
+                    class="form-control py-2" 
+                    id="ubicacion" 
+                    name="ubicacion" 
+                    value="<?= esc($alojamiento['ubicacion']) ?>" 
+                    required
+                >
+            </div>
+
+            <!-- precio -->
+            <div class="mb-3">
+                <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
+                    Precio por noche ($)
+                </label>
+                <input 
+                    type="number" 
+                    class="form-control py-2" 
+                    id="precios" 
+                    name="precios" 
+                    min="0" 
+                    step="0.01" 
+                    value="<?= esc($alojamiento['precios']) ?>" 
+                    required
+                >
+            </div>
+
+            <!-- imagen -->
+            <div class="mb-3">
+                <label for="imagen" class="form-label fw-bold small" style="color: #30473a;">
+                    Imagen del alojamiento
+                </label>
+
+                <!-- Muestra vista previa si ya existe una imagen -->
+                <?php if (!empty($alojamiento['imagen']) && file_exists(FCPATH . 'img/alojamientos/' . $alojamiento['imagen'])): ?>
+                    <div class="mb-2 d-flex align-items-center gap-3 p-2 bg-light rounded-3 border">
+                        <img 
+                            src="<?= base_url('img/alojamientos/' . $alojamiento['imagen']) ?>" 
+                            alt="Imagen actual" 
+                            class="rounded-2 object-fit-cover" 
+                            style="width: 70px; height: 50px;"
+                        >
+                        <span class="small text-secondary">
+                            Imagen actual: <strong><?= esc($alojamiento['imagen']) ?></strong>
+                        </span>
+                    </div>
+                <?php endif; ?>
+
+                <input 
+                    type="file" 
+                    class="form-control py-2" 
+                    id="imagen" 
+                    name="imagen" 
+                    accept="image/*"
+                >
+                <div class="form-text small text-secondary">
+                    Dejá este campo vacío si no querés cambiar la imagen actual.
+                </div>
+            </div>
+
+            <!-- descripcion -->
+            <div class="mb-4">
+                <label for="descripcion" class="form-label fw-bold small" style="color: #30473a;">
+                    Descripción
+                </label>
+                <textarea 
+                    class="form-control" 
+                    id="descripcion" 
+                    name="descripcion" 
+                    rows="4"
+                ><?= esc($alojamiento['descripcion'] ?? '') ?></textarea>
+            </div>
+
+            <!-- buttons -->
+            <div class="d-flex gap-2 pt-2">
+                <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #286b46;">
+                    Guardar cambios
+                </button>
+                <a href="<?= site_url('alojamientos') ?>" class="btn btn-light text-dark fw-bold px-4 py-2 rounded-3 border">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+<?php
+    include(APPPATH . 'Views/template/footer.php');
+?>

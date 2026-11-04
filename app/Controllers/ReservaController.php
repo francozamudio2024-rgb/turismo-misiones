@@ -9,9 +9,6 @@ class ReservaController extends BaseController
 {
     public function index()
     {
-        if (session()->get('rol') !== 'cliente') {
-            return redirect()->to(base_url('actividades'));
-        }
 
         $modelo = new ReservaModel();
         $actividades = new ActividadModel();
@@ -28,9 +25,6 @@ class ReservaController extends BaseController
 
     public function crear($id)
     {
-        if (session()->get('rol') !== 'cliente') {
-            return redirect()->to(base_url('actividades'));
-        }
 
         $actividades = new ActividadModel();
         $actividad = $actividades->find($id);
@@ -52,9 +46,6 @@ class ReservaController extends BaseController
 
     public function guardar()
     {
-        if (session()->get('rol') !== 'cliente') {
-            return redirect()->to(base_url('actividades'));
-        }
 
         $modelo = new ReservaModel();
         $actividades = new ActividadModel();
@@ -137,9 +128,6 @@ class ReservaController extends BaseController
 
     public function eliminar($id)
     {
-        if (session()->get('rol') !== 'cliente') {
-            return redirect()->to(base_url('actividades'));
-        }
 
         $modelo = new ReservaModel();
         $db = \Config\Database::connect();

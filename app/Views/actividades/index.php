@@ -20,7 +20,7 @@
 
 <main class="container my-5 px-4 px-lg-5">
 
-    <!-- Mensajes de Alerta / Flashdata -->
+    <!-- mensajes de alerta (flashdata) -->
     <?php if (session()->getFlashdata('mensaje')): ?>
         <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm mb-4" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i><?= session()->getFlashdata('mensaje') ?>

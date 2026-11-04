@@ -15,6 +15,7 @@ class ReservaController extends BaseController
 
         $reservas = $modelo
             ->where('usuario_id', session()->get('usuario_id'))
+            ->orderBy('id', 'DESC')
             ->findAll();
 
         return view('reservas/index', [
@@ -57,16 +58,13 @@ class ReservaController extends BaseController
         $fecha = $this->request->getPost('fecha');
 
         if (
+            empty($usuarioId) ||
             !is_numeric($actividadId) ||
             $cantidad < 1 ||
             empty($fecha)
         ) {
             return redirect()->to(base_url('actividades'))
                 ->with('error', 'Completá todos los datos correctamente.');
-        }
-
-        if (empty($usuarioId)) {
-            return redirect()->to(base_url('login'));
         }
 
         $actividad = $actividades->find($actividadId);
@@ -110,7 +108,8 @@ class ReservaController extends BaseController
             'actividad_id' => $actividadId,
             'cantidad' => $cantidad,
             'fecha' => $fecha,
-            'total' => $total
+            'total' => $total,
+            'devuelto' => 0
         ]);
 
         if ($resultado === false || !$db->transStatus()) {
@@ -126,7 +125,7 @@ class ReservaController extends BaseController
             ->with('mensaje', 'Reserva confirmada correctamente.');
     }
 
-    public function eliminar($id)
+    public function devolver($id)
     {
 
         $modelo = new ReservaModel();
@@ -145,6 +144,34 @@ class ReservaController extends BaseController
                 ->with('error', 'La reserva no existe o no te pertenece.');
         }
 
+        if ((int) $reserva['devuelto'] === 1) {
+            $db->transRollback();
+
+            return redirect()->to(base_url('reservas'))
+                ->with('error', 'Esta reserva ya fue devuelta.');
+        }
+
+        if (strtotime($reserva['fecha']) <= time()) {
+            $db->transRollback();
+
+            return redirect()->to(base_url('reservas'))
+                ->with('error', 'No podés devolver una reserva cuya actividad ya comenzó.');
+        }
+
+        $db->query(
+            'UPDATE reservas
+             SET devuelto = 1
+             WHERE id = ? AND usuario_id = ? AND devuelto = 0',
+            [$id, session()->get('usuario_id')]
+        );
+
+        if ($db->affectedRows() !== 1) {
+            $db->transRollback();
+
+            return redirect()->to(base_url('reservas'))
+                ->with('error', 'No se pudo devolver la reserva.');
+        }
+
         $db->query(
             'UPDATE actividades
              SET cupos = cupos + ?
@@ -152,18 +179,16 @@ class ReservaController extends BaseController
             [(int) $reserva['cantidad'], (int) $reserva['actividad_id']]
         );
 
-        $modelo->delete($id);
-
         if (!$db->transStatus()) {
             $db->transRollback();
 
             return redirect()->to(base_url('reservas'))
-                ->with('error', 'No se pudo eliminar la reserva.');
+                ->with('error', 'No se pudo completar la devolución.');
         }
 
         $db->transCommit();
 
         return redirect()->to(base_url('reservas'))
-            ->with('mensaje', 'Reserva eliminada y cupos devueltos correctamente.');
+            ->with('mensaje', 'La reserva fue devuelta correctamente y los cupos fueron recuperados.');
     }
 }

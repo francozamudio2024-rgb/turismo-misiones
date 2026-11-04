@@ -95,6 +95,7 @@ class ActividadController extends BaseController
         $modelo = new ActividadModel();
 
         $datos = [
+<<<<<<< HEAD
             'nombre' => $this->request->getPost('nombre'),
             'tipo' => $this->request->getPost('tipo') ?? $this->request->getPost('categoria'),
             'ubicacion' => $this->request->getPost('ubicacion'),
@@ -104,6 +105,18 @@ class ActividadController extends BaseController
             'imagen' => $nombreImagen,
             'descripcion' => $this->request->getPost('descripcion'),
             'estado' => 'A'
+=======
+            'nombre'        => $this->request->getPost('nombre'),
+            'categoria'     => $this->request->getPost('categoria'),
+            'ubicacion'     => $this->request->getPost('ubicacion'),
+            'cupos'         => $this->request->getPost('cupos'),
+            'precios'       => $this->request->getPost('precios'),
+            'imagen'        => $imagen ?? 'fondo.jpg',
+            'temporada'     => $this->request->getPost('temporada'),
+            'descripcion'   => $this->request->getPost('descripcion'),
+            'fecha_salida'  => $this->request->getPost('fecha_salida'),
+            'hora_salida'   => $this->request->getPost('hora_salida')
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
         ];
 
         $modelo->insert($datos);
@@ -157,6 +170,7 @@ class ActividadController extends BaseController
         }
 
         $datos = [
+<<<<<<< HEAD
             'nombre' => $this->request->getPost('nombre'),
             'tipo' => $this->request->getPost('tipo') ?? $this->request->getPost('categoria'),
             'ubicacion' => $this->request->getPost('ubicacion'),
@@ -165,6 +179,18 @@ class ActividadController extends BaseController
             'temporada' => $this->request->getPost('temporada'),
             'imagen' => $nombreImagen,
             'descripcion' => $this->request->getPost('descripcion')
+=======
+            'nombre'        => $this->request->getPost('nombre'),
+            'categoria'     => $this->request->getPost('categoria'),
+            'ubicacion'     => $this->request->getPost('ubicacion'),
+            'cupos'         => $this->request->getPost('cupos'),
+            'precios'       => $this->request->getPost('precios'),
+            'imagen'        => $imagen ?? ($actividad['imagen'] ?: 'fondo.jpg'),
+            'temporada'     => $this->request->getPost('temporada'),
+            'descripcion'   => $this->request->getPost('descripcion'),
+            'fecha_salida'  => $this->request->getPost('fecha_salida'),
+            'hora_salida'   => $this->request->getPost('hora_salida')
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
         ];
 
         $modelo->update($id, $datos);
@@ -172,6 +198,7 @@ class ActividadController extends BaseController
         return redirect()->to('/actividades')->with('mensaje', 'Actividad actualizada con éxito.');
     }
 
+<<<<<<< HEAD
     public function eliminar($id)
     {
         $modelo = new ActividadModel();
@@ -185,6 +212,39 @@ class ActividadController extends BaseController
     }
 
     public function reserva($id)
+=======
+   public function eliminar($id)
+{
+    if (session()->get('rol') !== 'admin') {
+        return redirect()->to(base_url('actividades'));
+    }
+
+    $db = \Config\Database::connect();
+
+    $db->transBegin();
+
+    $db->table('reservas')
+        ->where('actividad_id', $id)
+        ->delete();
+
+    $db->table('actividades')
+        ->where('id', $id)
+        ->delete();
+
+    if (!$db->transStatus()) {
+        $db->transRollback();
+
+        return redirect()->to(base_url('actividades'))
+            ->with('error', 'No se pudo eliminar la actividad.');
+    }
+
+    $db->transCommit();
+
+    return redirect()->to(base_url('actividades'))
+        ->with('mensaje', 'Actividad eliminada correctamente.');
+}
+    private function subirImagen()
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
     {
         $modelo = new ActividadModel();
         $actividad = $modelo->find($id);

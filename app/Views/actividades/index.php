@@ -3,9 +3,14 @@
     include(APPPATH . 'Views/template/header.php');
 ?>
 
+<<<<<<< HEAD
 <!-- hero section -->
 <section class="position-relative text-white py-5 d-flex align-items-center" 
          style="min-height: 350px; background: linear-gradient(rgba(16, 44, 36, 0.65), rgba(16, 44, 36, 0.65)), url('<?= base_url('img/home/fondo2.jpg') ?>') center/cover no-repeat;">
+=======
+<section class="position-relative text-white py-5 d-flex align-items-center"
+         style="min-height: 350px; background: linear-gradient(rgba(16, 44, 36, 0.65), rgba(16, 44, 36, 0.65)), url('<?= base_url('img/fondo2.jpg') ?>') center/cover no-repeat;">
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
     <div class="container px-4 px-lg-5">
         <div class="row">
             <div class="col-lg-8 col-xl-7">
@@ -41,7 +46,10 @@
             <p class="text-muted mb-0">Elegí la experiencia que mejor se adapte a tu itinerario.</p>
         </div>
 
+<<<<<<< HEAD
         <!-- boton de agregar actividades -->
+=======
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
         <?php if (session()->get('rol') === 'admin'): ?>
             <a href="<?= base_url('actividades/crear') ?>" class="btn btn-success fw-bold px-4 py-2 text-nowrap" style="background-color: #174d3c; border-color: #174d3c;">
                 <i class="bi bi-plus-circle me-1"></i> Agregar actividad
@@ -49,24 +57,43 @@
         <?php endif; ?>
     </div>
 
+<<<<<<< HEAD
     <!-- grid de actividades -->
+=======
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
         <?php if (!empty($actividades)): ?>
 
             <?php foreach ($actividades as $actividad): ?>
 
+<<<<<<< HEAD
                 <!-- filtro de inactivos para usuario logeado-->
                 <?php if (($actividad['estado'] ?? 'A') === 'A' || session()->get('rol') === 'admin'): ?> 
 
                     <?php 
                         $esInactivo = (($actividad['estado'] ?? 'A') === 'I');
                     ?>
+=======
+                <?php
+                    $cupos = (int) $actividad['cupos'];
+                    $imagenActividad = !empty($actividad['imagen']) ? $actividad['imagen'] : 'fondo.jpg';
+                ?>
+
+                <div class="col">
+                    <article class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden">
+
+                        <img src="<?= base_url('img/' . $imagenActividad) ?>"
+                             class="card-img-top object-fit-cover"
+                             alt="<?= esc($actividad['nombre']) ?>"
+                             style="height: 220px;">
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
 
                     <div class="col">
                         <article class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden <?= $esInactivo ? 'bg-light' : '' ?>" 
                                  style="<?= $esInactivo ? 'opacity: 0.75;' : '' ?>">
 
+<<<<<<< HEAD
                             <!-- banda de aviso de eliminacion, solo admin lo ve -->
                             <?php if ($esInactivo): ?>
                                 <div class="bg-secondary text-white text-center py-1 fw-bold small text-uppercase" style="letter-spacing: 1px; font-size: 0.75rem;">
@@ -208,6 +235,89 @@
                     </div>
 
                 <?php endif; ?>
+=======
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge bg-success text-uppercase">
+                                    <?= esc($actividad['categoria']) ?>
+                                </span>
+
+                                <?php if (!empty($actividad['temporada'])): ?>
+                                    <span class="badge bg-info text-dark">
+                                        <?= esc($actividad['temporada']) ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <h3 class="card-title h5 fw-bold text-dark mb-2">
+                                <?= esc($actividad['nombre']) ?>
+                            </h3>
+
+                            <p class="card-subtitle text-secondary fw-semibold small mb-3">
+                                <i class="bi bi-geo-alt-fill text-danger me-1"></i><?= esc($actividad['ubicacion']) ?>
+                            </p>
+
+                            <p class="card-text text-muted small flex-grow-1 mb-3" style="line-height: 1.5;">
+                                <?= esc($actividad['descripcion']) ?>
+                            </p>
+
+                            <div class="mb-2">
+                                <?php if ($cupos === 0): ?>
+                                    <span class="badge bg-danger">
+                                        Sin cupos disponibles
+                                    </span>
+                                <?php elseif ($cupos < 5): ?>
+                                    <span class="badge bg-warning text-dark">
+                                        ¡Quedan pocos cupos! <?= $cupos ?> disponibles
+                                    </span>
+                                <?php else: ?>
+                                    <span class="small text-muted">
+                                        <i class="bi bi-people-fill me-1"></i>
+                                        Cupos disponibles: <strong><?= $cupos ?></strong>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="h4 fw-bold my-3" style="color: #174d3c;">
+                                $<?= number_format((float) $actividad['precios'], 0, ',', '.') ?>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-auto pt-2 border-top">
+
+                                <?php if (session()->get('rol') === 'cliente'): ?>
+                                    <?php if ($cupos > 0): ?>
+                                        <a href="<?= base_url('reservas/crear/' . $actividad['id']) ?>" class="btn btn-outline-success btn-sm w-100 fw-bold">
+                                            Reservar
+                                        </a>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm w-100" disabled>
+                                            Sin disponibilidad
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                <?php if (session()->get('rol') === 'admin'): ?>
+                                    <a href="<?= base_url('actividades/editar/' . $actividad['id']) ?>"
+                                       class="btn btn-warning btn-sm fw-bold px-3">
+                                        Editar
+                                    </a>
+
+                                    <form action="<?= base_url('actividades/eliminar/' . $actividad['id']) ?>"
+                                          method="post"
+                                          onsubmit="return confirm('¿Seguro que querés eliminar esta actividad?');"
+                                          class="d-inline">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="btn btn-danger btn-sm fw-bold px-3">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
 
             <?php endforeach; ?>
 

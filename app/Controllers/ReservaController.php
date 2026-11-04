@@ -8,6 +8,7 @@ use App\Models\ActividadModel;
 class ReservaController extends BaseController
 {
     public function index()
+<<<<<<< HEAD
     {
 
         $modelo = new ReservaModel();
@@ -22,7 +23,27 @@ class ReservaController extends BaseController
             'reservas' => $reservas,
             'actividades' => $actividades->findAll()
         ]);
+=======
+{
+    if (session()->get('rol') !== 'cliente') {
+        return redirect()->to(base_url('actividades'));
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
     }
+
+    $db = \Config\Database::connect();
+
+    $reservas = $db->table('reservas')
+        ->select('reservas.*, actividades.nombre AS nombre_actividad')
+        ->join('actividades', 'actividades.id = reservas.actividad_id', 'left')
+        ->where('reservas.usuario_id', session()->get('usuario_id'))
+        ->orderBy('reservas.id', 'DESC')
+        ->get()
+        ->getResultArray();
+
+    return view('reservas/index', [
+        'reservas' => $reservas
+    ]);
+}
 
     public function crear($id)
     {

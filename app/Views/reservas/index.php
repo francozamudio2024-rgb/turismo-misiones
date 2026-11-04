@@ -1,4 +1,4 @@
-<?= $this->include('template/header') ?>
+<?php include(APPPATH . 'Views/template/header.php'); ?>
 
 <style>
     .reservas-contenedor {
@@ -113,14 +113,7 @@
         <?php foreach ($reservas as $reserva): ?>
 
             <?php
-            $nombreActividad = 'Actividad #' . $reserva['actividad_id'];
-
-            foreach ($actividades as $actividad) {
-                if ((int) $actividad['id'] === (int) $reserva['actividad_id']) {
-                    $nombreActividad = $actividad['nombre'];
-                    break;
-                }
-            }
+            $nombreActividad = $reserva['nombre_actividad'] ?? 'Actividad eliminada';
 
             $fechaReserva = strtotime($reserva['fecha']);
             $fechaPasada = $fechaReserva <= time();
@@ -209,4 +202,4 @@
 
 </main>
 
-<?= $this->include('template/footer') ?>
+<?php include(APPPATH . 'Views/template/footer.php'); ?>

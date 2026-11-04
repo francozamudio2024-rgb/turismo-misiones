@@ -15,15 +15,24 @@
             Modificá los datos de la actividad en el catálogo.
         </p>
 
+<<<<<<< HEAD
         <!-- form -->
         <form action="<?= site_url('actividades/actualizar/' . $actividad['id']) ?>" method="POST" enctype="multipart/form-data">
             <?= csrf_field() ?>
+=======
+    <form action="<?= base_url('actividades/actualizar/' . $actividad['id']) ?>"
+          method="post"
+          enctype="multipart/form-data"
+          class="bg-white p-4 p-md-5 border rounded-3 shadow-sm"
+          style="border-color: #e3e9e2 !important;">
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
 
             <!-- nombre de la actividad -->
             <div class="mb-3">
                 <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">
                     Nombre de la actividad
                 </label>
+<<<<<<< HEAD
                 <input 
                     type="text" 
                     class="form-control py-2" 
@@ -32,6 +41,9 @@
                     value="<?= esc($actividad['nombre']) ?>" 
                     required
                 >
+=======
+                <input type="text" class="form-control py-2" id="nombre" name="nombre" value="<?= esc($actividad['nombre']) ?>" required>
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
             </div>
 
             <!-- categoría de la actividad -->
@@ -39,6 +51,7 @@
                 <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
                     Categoría de la actividad
                 </label>
+<<<<<<< HEAD
                 <select class="form-select py-2" id="tipo" name="tipo" required>
                     <?php 
                     $categorias = [
@@ -57,6 +70,9 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
+=======
+                <input type="text" class="form-control py-2" id="categoria" name="categoria" value="<?= esc($actividad['categoria']) ?>" required>
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
             </div>
 
             <!-- ubicación -->
@@ -64,6 +80,7 @@
                 <label for="ubicacion" class="form-label fw-bold small" style="color: #30473a;">
                     Ubicación
                 </label>
+<<<<<<< HEAD
                 <input 
                     type="text" 
                     class="form-control py-2" 
@@ -105,6 +122,74 @@
                         value="<?= esc($actividad['cupos'] ?? 0) ?>" 
                         required
                     >
+=======
+                <input type="text" class="form-control py-2" id="ubicacion" name="ubicacion" value="<?= esc($actividad['ubicacion']) ?>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="temporada" class="form-label fw-bold small" style="color: #344b3c;">
+                    Temporada
+                </label>
+                <input type="text" class="form-control py-2" id="temporada" name="temporada" value="<?= esc($actividad['temporada']) ?>">
+            </div>
+
+            <div class="col-md-6">
+                <label for="fecha_salida" class="form-label fw-bold small" style="color: #344b3c;">
+                    Fecha de la actividad
+                </label>
+                <input type="date"
+                       class="form-control py-2"
+                       id="fecha_salida"
+                       name="fecha_salida"
+                       min="<?= date('Y-m-d') ?>"
+                       value="<?= esc($actividad['fecha_salida'] ?? '') ?>"
+                       required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="hora_salida" class="form-label fw-bold small" style="color: #344b3c;">
+                    Horario de la actividad
+                </label>
+                <input type="time"
+                       class="form-control py-2"
+                       id="hora_salida"
+                       name="hora_salida"
+                       value="<?= esc($actividad['hora_salida'] ?? '') ?>"
+                       required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="cupos" class="form-label fw-bold small" style="color: #344b3c;">
+                    Cupos disponibles
+                </label>
+                <input type="number" class="form-control py-2" id="cupos" name="cupos" min="0" value="<?= esc($actividad['cupos']) ?>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="precios" class="form-label fw-bold small" style="color: #344b3c;">
+                    Precio por persona
+                </label>
+                <input type="number" class="form-control py-2" id="precios" name="precios" min="0" step="0.01" value="<?= esc($actividad['precios']) ?>" required>
+            </div>
+
+            <div class="col-12">
+                <label for="imagen" class="form-label fw-bold small" style="color: #344b3c;">
+                    Imagen de la actividad
+                </label>
+
+                <?php if (!empty($actividad['imagen'])): ?>
+                    <div class="mb-2">
+                        <img src="<?= base_url('img/' . $actividad['imagen']) ?>"
+                             alt="Imagen actual"
+                             class="img-thumbnail rounded"
+                             style="max-height: 150px; object-fit: cover;">
+                    </div>
+                <?php endif; ?>
+
+                <input type="file" class="form-control" id="imagen" name="imagen">
+                <div class="form-text small" style="color: #818c83;">
+                    Elegí una foto nueva solo si querés cambiar la actual. Máximo 2 MB.
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
                 </div>
             </div>
 
@@ -113,6 +198,7 @@
                 <label for="temporada" class="form-label fw-bold small" style="color: #30473a;">
                     Temporada recomendada
                 </label>
+<<<<<<< HEAD
                 <select class="form-select py-2" id="temporada" name="temporada" required>
                     <?php 
                     $temporadas = ['Verano', 'Otoño', 'Invierno', 'Primavera', 'Todo el año'];
@@ -124,6 +210,9 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
+=======
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required><?= esc($actividad['descripcion']) ?></textarea>
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
             </div>
 
             <!-- imagen -->

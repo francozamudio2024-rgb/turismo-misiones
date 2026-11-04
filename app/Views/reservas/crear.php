@@ -1,4 +1,7 @@
-<?= $this->include('template/header') ?>
+<?php
+    $seccion = 'actividades';
+    include(APPPATH . 'Views/template/header.php');
+?>
 
 <main class="container py-5">
     <div class="row justify-content-center">
@@ -20,16 +23,33 @@
 
                     <div class="mb-4">
                         <h4 class="fw-bold"><?= esc($actividad['nombre']) ?></h4>
+
                         <p class="text-muted mb-1">
                             <?= esc($actividad['categoria']) ?> |
                             <?= esc($actividad['ubicacion']) ?>
                         </p>
+
                         <p class="mb-1">
                             Precio por persona:
                             <strong>
                                 $<?= number_format((float) $actividad['precios'], 0, ',', '.') ?>
                             </strong>
                         </p>
+
+                        <p class="mb-1">
+                            Fecha de la actividad:
+                            <strong>
+                                <?= !empty($actividad['fecha_salida']) ? date('d/m/Y', strtotime($actividad['fecha_salida'])) : 'Sin fecha asignada' ?>
+                            </strong>
+                        </p>
+
+                        <p class="mb-1">
+                            Horario:
+                            <strong>
+                                <?= !empty($actividad['hora_salida']) ? date('H:i', strtotime($actividad['hora_salida'])) . ' hs' : 'Sin horario asignado' ?>
+                            </strong>
+                        </p>
+
                         <p class="mb-0">
                             Cupos disponibles:
                             <strong><?= esc($actividad['cupos']) ?></strong>
@@ -45,10 +65,11 @@
                             value="<?= esc($actividad['id']) ?>"
                         >
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="cantidad" class="form-label fw-semibold">
                                 Cantidad de personas
                             </label>
+
                             <input
                                 type="number"
                                 class="form-control"
@@ -57,20 +78,6 @@
                                 min="1"
                                 max="<?= esc($actividad['cupos']) ?>"
                                 value="1"
-                                required
-                            >
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="fecha" class="form-label fw-semibold">
-                                Fecha y hora de la actividad
-                            </label>
-                            <input
-                                type="datetime-local"
-                                class="form-control"
-                                id="fecha"
-                                name="fecha"
-                                min="<?= date('Y-m-d\TH:i') ?>"
                                 required
                             >
                         </div>
@@ -100,4 +107,6 @@
     </div>
 </main>
 
-<?= $this->include('template/footer') ?>
+<?php
+    include(APPPATH . 'Views/template/footer.php');
+?>

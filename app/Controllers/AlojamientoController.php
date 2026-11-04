@@ -11,7 +11,7 @@ class AlojamientoController extends BaseController
         $modelo = new AlojamientoModel();
         $alojamientos = $modelo->findAll();
 
-        // calcula la esttemporada actual
+        // calcula la temporada actual
         $mesActual = (int) date('n');
         if (in_array($mesActual, [12, 1, 2])) {
             $temporadaActual = 'Verano';
@@ -38,7 +38,7 @@ class AlojamientoController extends BaseController
             $idMasElegido = $query['alojamiento_id'] ?? null;
         }
 
-        // 3. Mapear banderas dinámicas para la vista
+        // badges
         foreach ($alojamientos as &$alojamiento) {
             $alojamiento['recomendado'] = false;
             $alojamiento['mas_elegido'] = false;
@@ -68,7 +68,7 @@ class AlojamientoController extends BaseController
     public function guardar()
     {
 
-        // Reglas de validación para las imágenes
+        // validación de imagenes
         $reglas = [
             'imagen' => [
                 'rules'  => 'is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png,image/gif]|max_size[imagen,4096]',
@@ -95,7 +95,6 @@ class AlojamientoController extends BaseController
 
         $modelo = new AlojamientoModel();
 
-        // Se toman los valores directamente del POST sin filtros de mínimos
         $datos = [
             'nombre'      => $this->request->getPost('nombre'),
             'tipo'        => $this->request->getPost('tipo'),
@@ -177,30 +176,80 @@ class AlojamientoController extends BaseController
         return redirect()->to('/alojamientos');
     }
 
-    public function eliminar($id)
-        {
+        public function eliminar($id)
+            {
 
+                $modelo = new AlojamientoModel();
+                $alojamiento = $modelo->find($id);
+
+                if ($alojamiento) { 
+                    $modelo->update($id, ['estado' => 'I']);
+                }
+
+                return redirect()->to('/alojamientos');
+            }
+
+        public function reserva($id)
+        {
             $modelo = new AlojamientoModel();
             $alojamiento = $modelo->find($id);
 
-            if ($alojamiento) { 
-                $modelo->update($id, ['estado' => 'I']);
+            if (!$alojamiento) {
+                return redirect()->to('/alojamientos');
             }
 
-            return redirect()->to('/alojamientos');
+            return view('alojamientos/reserva', [
+                'alojamiento' => $alojamiento
+            ]);
         }
 
-    public function reserva($id)
+        public function procesarReserva()
     {
-        $modelo = new AlojamientoModel();
-        $alojamiento = $modelo->find($id);
+
+        $idAlojamiento = $this->request->getPost('alojamiento_id');
+        $cantidad = (int) $this->request->getPost('cantidad');
+
+        if (!$idAlojamiento || $cantidad <= 0) {
+            return redirect()->back()->with('error', 'Datos de reserva no válidos.');
+        }
+
+        $modeloAlojamiento = new AlojamientoModel();
+        $alojamiento = $modeloAlojamiento->find($idAlojamiento);
 
         if (!$alojamiento) {
-            return redirect()->to('/alojamientos');
+            return redirect()->to('/alojamientos')->with('error', 'El alojamiento no existe.');
         }
 
-        return view('alojamientos/detalle', [
-            'alojamiento' => $alojamiento
-        ]);
+        $cuposDisponibles = (int) ($alojamiento['cupos'] ?? 0);
+
+        if ($cantidad > $cuposDisponibles) {
+            return redirect()->back()->with('error', 'No hay suficientes cupos disponibles.'); //Validación de cupos
+        }
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        $nuevosCupos = $cuposDisponibles - $cantidad;
+        $modeloAlojamiento->update($idAlojamiento, ['cupos' => $nuevosCupos]); //descuento de cupos en el alojamiento
+
+        $datosReserva = [
+            'usuario_id'    => session()->get('usuario_id'),
+            'actividad_id'  => 0, // 0 porqué es alojamiento
+            'alojamiento_id' => $idAlojamiento,
+            'cantidad'      => $cantidad,
+            'fecha'         => date('Y-m-d H:i:s'), // fecha de la reserva
+            'total'         => $cantidad * (float) $alojamiento['precios'], // valor total
+            'devolucion'    => 'NO' 
+        ];
+
+        $db->table('reservas')->insert($datosReserva);
+
+        $db->transComplete();
+
+        if ($db->transStatus() === false) {
+            return redirect()->back()->with('error', 'Ocurrió un error al procesar la reserva. Intentalo de nuevo.');
+        }
+
+        return redirect()->to('/alojamientos')->with('mensaje', '¡Reserva realizada con éxito!');
     }
 }

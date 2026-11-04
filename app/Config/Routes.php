@@ -45,4 +45,5 @@ $routes->get('alojamientos/editar/(:num)', 'AlojamientoController::editar/$1',['
 $routes->post('alojamientos/actualizar/(:num)', 'AlojamientoController::actualizar/$1', ['filter' => 'adminAuth']);
 $routes->post('alojamientos/eliminar/(:num)', 'AlojamientoController::eliminar/$1', ['filter' => 'adminAuth']);
 
-$routes->get('alojamientos/reserva/(:num)', 'AlojamientoController::reserva/$1');
+$routes->get('alojamientos/reserva/(:num)', 'AlojamientoController::reserva/$1', ['filter' => 'auth']);
+$routes->post('alojamientos/procesarReserva', 'AlojamientoController::procesarReserva', ['filter' => 'auth']);

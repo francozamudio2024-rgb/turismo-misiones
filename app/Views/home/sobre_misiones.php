@@ -7,7 +7,7 @@
 
     <!-- hero section -->
     <section class="position-relative text-white text-center py-5 d-flex align-items-center justify-content-center" 
-             style="min-height: 360px; background: linear-gradient(rgba(14, 39, 29, 0.68), rgba(14, 39, 29, 0.68)), url('<?= base_url('img/fondo2.jpg') ?>') center 45% / cover;">
+             style="min-height: 360px; background: linear-gradient(rgba(14, 39, 29, 0.68), rgba(14, 39, 29, 0.68)), url('<?= base_url('img/home/fondo2.jpg') ?>') center 45% / cover;">
         <div class="container py-4" style="max-width: 780px;">
             <span class="d-inline-block fw-bold small text-uppercase mb-3" style="color: #f2c66d; letter-spacing: 3px;">
                 Identidad misionera

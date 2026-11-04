@@ -5,7 +5,7 @@
 
 <!-- hero section -->
 <section class="position-relative text-white py-5 d-flex align-items-center" 
-         style="min-height: 350px; background: linear-gradient(rgba(16, 44, 36, 0.65), rgba(16, 44, 36, 0.65)), url('<?= base_url('img/fondo2.jpg') ?>') center/cover no-repeat;">
+         style="min-height: 350px; background: linear-gradient(rgba(16, 44, 36, 0.65), rgba(16, 44, 36, 0.65)), url('<?= base_url('img/home/fondo2.jpg') ?>') center/cover no-repeat;">
     <div class="container px-4 px-lg-5">
         <div class="row">
             <div class="col-lg-8 col-xl-7">

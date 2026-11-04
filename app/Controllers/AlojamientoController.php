@@ -96,13 +96,13 @@ class AlojamientoController extends BaseController
         $modelo = new AlojamientoModel();
 
         $datos = [
-            'nombre'      => $this->request->getPost('nombre'),
-            'tipo'        => $this->request->getPost('tipo'),
-            'ubicacion'   => $this->request->getPost('ubicacion'),
-            'precios'     => $this->request->getPost('precios'),
-            'cupos'       => $this->request->getPost('cupos'),
-            'temporada'   => $this->request->getPost('temporada'),
-            'imagen'      => $nombreImagen,
+            'nombre' => $this->request->getPost('nombre'),
+            'tipo' => $this->request->getPost('tipo'),
+            'ubicacion' => $this->request->getPost('ubicacion'),
+            'precios' => $this->request->getPost('precios'),
+            'cupos' => $this->request->getPost('cupos'),
+            'temporada' => $this->request->getPost('temporada'),
+            'imagen' => $nombreImagen,
             'descripcion' => $this->request->getPost('descripcion'),
             'estado' => 'A'
         ];
@@ -161,13 +161,13 @@ class AlojamientoController extends BaseController
 
         // Se toman los valores directamente del POST sin filtros de mínimos
         $datos = [
-            'nombre'      => $this->request->getPost('nombre'),
-            'tipo'        => $this->request->getPost('tipo'),
-            'ubicacion'   => $this->request->getPost('ubicacion'),
-            'precios'     => $this->request->getPost('precios'),
-            'cupos'       => $this->request->getPost('cupos'),
-            'temporada'   => $this->request->getPost('temporada'),
-            'imagen'      => $nombreImagen,
+            'nombre' => $this->request->getPost('nombre'),
+            'tipo' => $this->request->getPost('tipo'),
+            'ubicacion' => $this->request->getPost('ubicacion'),
+            'precios' => $this->request->getPost('precios'),
+            'cupos' => $this->request->getPost('cupos'),
+            'temporada' => $this->request->getPost('temporada'),
+            'imagen' => $nombreImagen,
             'descripcion' => $this->request->getPost('descripcion')
         ];
 
@@ -233,13 +233,13 @@ class AlojamientoController extends BaseController
         $modeloAlojamiento->update($idAlojamiento, ['cupos' => $nuevosCupos]); //descuento de cupos en el alojamiento
 
         $datosReserva = [
-            'usuario_id'    => session()->get('usuario_id'),
-            'actividad_id'  => 0, // 0 porqué es alojamiento
+            'usuario_id' => session()->get('usuario_id'),
+            'actividad_id' => 0, // 0 porqué es alojamiento
             'alojamiento_id' => $idAlojamiento,
-            'cantidad'      => $cantidad,
-            'fecha'         => date('Y-m-d H:i:s'), // fecha de la reserva
-            'total'         => $cantidad * (float) $alojamiento['precios'], // valor total
-            'devolucion'    => 'NO' 
+            'cantidad' => $cantidad,
+            'fecha' => date('Y-m-d H:i:s'), // fecha de la reserva
+            'total' => $cantidad * (float) $alojamiento['precios'], // valor total
+            'devolucion' => 'NO' 
         ];
 
         $db->table('reservas')->insert($datosReserva);

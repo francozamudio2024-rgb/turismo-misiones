@@ -1,4 +1,7 @@
-<?= view('template/header', ['seccion' => 'alojamientos']) ?>
+<?php
+    $seccion = 'alojamientos';
+    include(APPPATH . 'Views/template/header.php');
+?>
 
 <main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
@@ -115,4 +118,6 @@
 
 </main>
 
-<?= view('template/footer') ?>
+<?php
+    include(APPPATH . 'Views/template/footer.php');
+?>

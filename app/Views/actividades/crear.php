@@ -3,141 +3,118 @@
     include(APPPATH . 'Views/template/header.php');
 ?>
 
-<main class="container my-5 px-3 px-md-4" style="max-width: 850px;">
+<main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
-    <div class="mb-4">
-        <span class="text-uppercase fw-bold small tracking-wider" style="color: #43805f; letter-spacing: 2px;">
-            Gestión de actividades
-        </span>
-        <h1 class="fw-bold my-2" style="color: #174d3c; font-size: clamp(30px, 5vw, 42px);">
+    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+
+        <h2 class="display-6 fw-bold mb-1" style="font-family: Georgia, serif; color: #174d3c;">
             Agregar actividad
-        </h1>
-        <p class="text-secondary mb-0">
-            Completá los datos para incorporar una nueva propuesta turística al listado.
+        </h2>
+        <p class="text-secondary mb-4 pb-2" style="line-height: 1.6;">
+            Completá los datos de la experiencia que querés incorporar al catálogo.
         </p>
-    </div>
 
-    <!-- form -->
-    <form action="<?= base_url('actividades/guardar') ?>" 
-          method="post" 
-          enctype="multipart/form-data"
-          class="bg-white p-4 p-md-5 border rounded-3 shadow-sm" 
-          style="border-color: #e3e9e2 !important;">
+        <!-- form -->
+        <form action="<?= site_url('actividades/guardar') ?>" method="POST" enctype="multipart/form-data">
+            <?= csrf_field() ?>
 
-        <?= csrf_field() ?>
-
-        <div class="row g-3">
-
-            <div class="col-md-6">
-                <label for="nombre" class="form-label fw-bold small" style="color: #344b3c;">
+            <!-- nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">
                     Nombre de la actividad
                 </label>
-                <input type="text" 
-                       class="form-control py-2" 
-                       id="nombre" 
-                       name="nombre" 
-                       value="<?= old('nombre') ?>" 
-                       required>
+                <input type="text" class="form-control py-2" id="nombre" name="nombre" placeholder="Ej. Senderismo en Parque M aristocratic" required>
             </div>
 
-            <div class="col-md-6">
-                <label for="categoria" class="form-label fw-bold small" style="color: #344b3c;">
-                    Categoría
+            <!-- categoría  -->
+            <div class="mb-3">
+                <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
+                    Categoría de la actividad
                 </label>
-                <input type="text" 
-                       class="form-control py-2" 
-                       id="categoria" 
-                       name="categoria" 
-                       value="<?= old('categoria') ?>" 
-                       required>
+                <select class="form-select py-2" id="tipo" name="tipo" required>
+                    <option value="" selected disabled>Seleccioná una opción</option>
+                    <option value="Naturaleza y Senderismo">Naturaleza y Senderismo</option>
+                    <option value="Aventura y Deportes Náuticos">Aventura y Deportes Náuticos</option>
+                    <option value="Saltos y Cascadas">Saltos y Cascadas</option>
+                    <option value="Gastronomía y Sabores Locales">Gastronomía y Sabores Locales</option>
+                    <option value="Cultura e Historia">Cultura e Historia</option>
+                    <option value="Paseos Familiares y Relax">Paseos Familiares y Relax</option>
+                </select>
             </div>
 
-            <div class="col-md-6">
-                <label for="ubicacion" class="form-label fw-bold small" style="color: #344b3c;">
+            <!-- ubicación -->
+            <div class="mb-3">
+                <label for="ubicacion" class="form-label fw-bold small" style="color: #30473a;">
                     Ubicación
                 </label>
-                <input type="text" 
-                       class="form-control py-2" 
-                       id="ubicacion" 
-                       name="ubicacion" 
-                       value="<?= old('ubicacion') ?>" 
-                       required>
+                <input type="text" class="form-control py-2" id="ubicacion" name="ubicacion" placeholder="Ej. Puerto Iguazú, Misiones" required>
             </div>
 
-            <div class="col-md-6">
-                <label for="temporada" class="form-label fw-bold small" style="color: #344b3c;">
-                    Temporada
-                </label>
-                <input type="text" 
-                       class="form-control py-2" 
-                       id="temporada" 
-                       name="temporada" 
-                       value="<?= old('temporada') ?>">
-            </div>
-
-            <div class="col-md-6">
-                <label for="cupos" class="form-label fw-bold small" style="color: #344b3c;">
-                    Cupos disponibles
-                </label>
-                <input type="number" 
-                       class="form-control py-2" 
-                       id="cupos" 
-                       name="cupos" 
-                       min="0" 
-                       oninput="if(this.value < 0) this.value = 0;"
-                       value="<?= old('cupos') ?>" 
-                       required>
-            </div>
-
-            <div class="col-md-6">
-                <label for="precios" class="form-label fw-bold small" style="color: #344b3c;">
-                    Precio por persona
-                </label>
-                <input type="number" 
-                       class="form-control py-2" 
-                       id="precios" 
-                       name="precios" 
-                       min="0" 
-                       step="0.01" 
-                       oninput="if(this.value < 0) this.value = 0;"
-                       value="<?= old('precios') ?>" 
-                       required>
-            </div>
-
-            <div class="col-12">
-                <label for="imagen" class="form-label fw-bold small" style="color: #344b3c;">
-                    Imagen de la actividad
-                </label>
-                <input type="file" class="form-control" id="imagen" name="imagen">
-                <div class="form-text small" style="color: #818c83;">
-                    Seleccioná una imagen en formato JPG, PNG o GIF. Máximo 4 MB.
+            <!-- div precio y cupos -->
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
+                        Precio por persona ($)
+                    </label>
+                    <input type="number" class="form-control py-2" id="precios" name="precios" min="0" step="0.01" oninput="if(this.value < 0) this.value = 0;" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="cupos" class="form-label fw-bold small" style="color: #30473a;">
+                        Cupos disponibles
+                    </label>
+                    <input type="number" class="form-control py-2" id="cupos" name="cupos" min="0" step="1" oninput="if(this.value < 0) this.value = 0;" required>
                 </div>
             </div>
 
-            <div class="col-12">
-                <label for="descripcion" class="form-label fw-bold small" style="color: #344b3c;">
-                    Descripción
+            <!-- temporada recomendada -->
+            <div class="mb-3">
+                <label for="temporada" class="form-label fw-bold small" style="color: #30473a;">
+                    Temporada recomendada
                 </label>
-                <textarea class="form-control" 
-                          id="descripcion" 
-                          name="descripcion" 
-                          rows="4" 
-                          required><?= old('descripcion') ?></textarea>
+                <select class="form-select py-2" id="temporada" name="temporada" required>
+                    <option value="Todo el año" selected>Todo el año</option>
+                    <option value="Verano">Verano</option>
+                    <option value="Otoño">Otoño</option>
+                    <option value="Invierno">Invierno</option>
+                    <option value="Primavera">Primavera</option>
+                </select>
             </div>
 
-        </div>
+            <!-- Imagen -->
+            <div class="mb-3">
+                <label for="imagen" class="form-label fw-bold small" style="color: #30473a;">
+                    Imagen de la actividad
+                </label>
+                <input 
+                    type="file" 
+                    class="form-control py-2" 
+                    id="imagen" 
+                    name="imagen" 
+                    accept="image/*"
+                >
+            </div>
 
-        <div class="d-flex flex-column flex-sm-row align-items-center gap-2 mt-4 pt-3 border-top">
-            <button type="submit" class="btn text-white fw-bold px-4 py-2 w-100 w-sm-auto" style="background-color: #28744f;">
-                Guardar actividad
-            </button>
+            <!-- descripción -->
+            <div class="mb-4">
+                <label for="descripcion" class="form-label fw-bold small" style="color: #30473a;">
+                    Descripción
+                </label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describí la actividad y las recomendaciones para los visitantes"></textarea>
+            </div>
 
-            <a href="<?= base_url('actividades') ?>" class="btn border fw-bold px-4 py-2 w-100 w-sm-auto bg-white" style="color: #435548; border-color: #dce4dc !important;">
-                Cancelar
-            </a>
-        </div>
+            <!-- botones -->
+            <div class="d-flex gap-2 pt-2">
+                <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #286b46;">
+                    Guardar actividad
+                </button>
+                <a href="<?= site_url('actividades') ?>" class="btn btn-light text-dark fw-bold px-4 py-2 rounded-3 border">
+                    Cancelar
+                </a>
+            </div>
 
-    </form>
+        </form>
+
+    </div>
 
 </main>
 

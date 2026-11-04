@@ -7,7 +7,7 @@
 
     <!-- hero section -->
     <section class="position-relative text-white text-center py-5 d-flex align-items-center justify-content-center" 
-             style="min-height: 350px; background: linear-gradient(rgba(15, 40, 30, 0.72), rgba(15, 40, 30, 0.72)), url('<?= base_url('img/fondo.jpg') ?>') center / cover;">
+             style="min-height: 350px; background: linear-gradient(rgba(15, 40, 30, 0.72), rgba(15, 40, 30, 0.72)), url('<?= base_url('img/home/fondo.jpg') ?>') center / cover;">
         <div class="container py-4" style="max-width: 760px;">
             <span class="d-inline-block fw-bold small text-uppercase mb-3" style="color: #f2c66d; letter-spacing: 3px;">
                 Prepará tu recorrido

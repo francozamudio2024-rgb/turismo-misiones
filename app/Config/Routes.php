@@ -26,6 +26,9 @@ $routes->get('actividades/editar/(:num)', 'ActividadController::editar/$1', ['fi
 $routes->post('actividades/actualizar/(:num)', 'ActividadController::actualizar/$1', ['filter' => 'adminAuth']);
 $routes->post('actividades/eliminar/(:num)', 'ActividadController::eliminar/$1', ['filter' => 'adminAuth']);
 
+$routes->get('actividades/reserva/(:num)', 'ActividadController::reserva/$1');
+$routes->post('actividades/procesarReserva', 'ActividadController::procesarReserva', ['filter' => 'auth']);
+
 $routes->get('reservas', 'ReservaController::index', ['filter' => 'auth']);
 $routes->get('reservas/crear/(:num)', 'ReservaController::crear/$1', ['filter' => 'auth']);
 $routes->post('reservas/guardar', 'ReservaController::guardar', ['filter' => 'auth']);

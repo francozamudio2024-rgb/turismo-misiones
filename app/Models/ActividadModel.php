@@ -16,6 +16,7 @@ class ActividadModel extends Model
         'precios',
         'imagen',
         'temporada',
+        'estado',
         'descripcion'
     ];
 }

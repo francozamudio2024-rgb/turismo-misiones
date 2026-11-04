@@ -5,7 +5,7 @@
 
 <!-- hero section -->
 <section class="position-relative text-white text-center py-5 rounded-bottom-4 overflow-hidden" 
-         style="background: linear-gradient(rgba(23, 77, 60, 0.82), rgba(23, 77, 60, 0.82)), url('<?= base_url('img/fondo2.jpg') ?>') center/cover;">
+         style="background: linear-gradient(rgba(23, 77, 60, 0.82), rgba(23, 77, 60, 0.82)), url('<?= base_url('img/home/fondo2.jpg') ?>') center/cover;">
     <div class="container py-5">
         <h2 class="display-4 fw-bold mb-3" style="font-family: Georgia, serif;">Destinos y Atractivos</h2>
         <p class="lead mx-auto mb-0 text-light fs-5" style="max-width: 720px; line-height: 1.7;">
@@ -31,7 +31,7 @@
 
             <div class="col-md-6 col-lg-4">
                 <article class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                    <img src="<?= base_url('img/fondo2.jpg') ?>" 
+                    <img src="<?= base_url('img/home/fondo2.jpg') ?>" 
                          alt="Cataratas del Iguazú" 
                          class="card-img-top object-fit-cover" 
                          style="height: 220px;">
@@ -50,7 +50,7 @@
 
             <div class="col-md-6 col-lg-4">
                 <article class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                    <img src="<?= base_url('img/cataratas.jpg') ?>" 
+                    <img src="<?= base_url('img/home/cataratas.jpg') ?>" 
                          alt="Paisaje de Misiones" 
                          class="card-img-top object-fit-cover" 
                          style="height: 220px;">
@@ -69,7 +69,7 @@
 
             <div class="col-md-6 col-lg-4">
                 <article class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                    <img src="<?= base_url('img/fondo.jpg') ?>" 
+                    <img src="<?= base_url('img/home/fondo.jpg') ?>" 
                          alt="Selva misionera" 
                          class="card-img-top object-fit-cover" 
                          style="height: 220px;">

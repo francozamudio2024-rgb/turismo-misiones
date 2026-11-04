@@ -2,7 +2,7 @@
 .hero-section {
     min-height: 520px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('../img/fondo.jpg') center/cover no-repeat;
+                url('../img/home/fondo.jpg') center/cover no-repeat;
     border-radius: 0 0 50px 50px;
 }
 

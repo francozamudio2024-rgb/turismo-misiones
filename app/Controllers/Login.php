@@ -14,21 +14,21 @@ class Login extends BaseController
 
     public function ingresar()
     {
-        $email             = $this->request->getPost('email');
+        $email = $this->request->getPost('email');
         $passwordIngresada = $this->request->getPost('password');
 
         $usuarioModel = new UsuarioModel();
-        $usuario      = $usuarioModel->where('email', $email)->first();
+        $usuario = $usuarioModel->where('email', $email)->first();
 
         if ($usuario && password_verify($passwordIngresada, $usuario['password'])) { //Busca si existe el usuario en la base de datos y compara el hush
 
             session()->set([
                 'usuario_id' => $usuario['id'],
-                'nombre'     => $usuario['nombre'],
-                'apellido'   => $usuario['apellido'],
-                'email'      => $usuario['email'],
-                'rol'        => $usuario['rol'],
-                'logueado'   => true
+                'nombre' => $usuario['nombre'],
+                'apellido' => $usuario['apellido'],
+                'email' => $usuario['email'],
+                'rol' => $usuario['rol'],
+                'logueado' => true
             ]);
 
             return redirect()->to(base_url('/'))->with('mensaje', '¡Bienvenido de nuevo, ' . $usuario['nombre'] . '!');

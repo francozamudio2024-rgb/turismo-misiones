@@ -11,11 +11,11 @@
             Completá los datos del lugar que querés incorporar al catálogo.
         </p>
 
-        <!--form -->
+        <!-- form -->
         <form action="<?= site_url('alojamientos/guardar') ?>" method="POST" enctype="multipart/form-data">
             <?= csrf_field() ?>
 
-            <!-- nombre del alojamiento -->
+            <!-- nombre -->
             <div class="mb-3">
                 <label for="nombre" class="form-label fw-bold small" style="color: #30473a;">
                     Nombre del alojamiento
@@ -23,7 +23,7 @@
                 <input type="text" class="form-control py-2" id="nombre" name="nombre" required>
             </div>
 
-            <!-- Tipo de alojamiento -->
+            <!-- categoría  -->
             <div class="mb-3">
                 <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
                     Tipo de alojamiento
@@ -47,15 +47,37 @@
                 <input type="text" class="form-control py-2" id="ubicacion" name="ubicacion" placeholder="Ej. Puerto Iguazú, Misiones" required>
             </div>
 
-            <!-- precio -->
-            <div class="mb-3">
-                <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
-                    Precio por noche ($)
-                </label>
-                <input type="number" class="form-control py-2" id="precios" name="precios" min="0" step="0.01" required>
+            <!-- div precio y cupos -->
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
+                        Precio por noche ($)
+                    </label>
+                    <input type="number" class="form-control py-2" id="precios" name="precios" min="0" step="0.01" oninput="if(this.value < 0) this.value = 0;" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="cupos" class="form-label fw-bold small" style="color: #30473a;">
+                        Cupos disponibles
+                    </label>
+                    <input type="number" class="form-control py-2" id="cupos" name="cupos" min="0" step="1" oninput="if(this.value < 0) this.value = 0;" required>
+                </div>
             </div>
 
-            <!-- form del imagen -->
+            <!-- temporada recomendada -->
+            <div class="mb-3">
+                <label for="temporada" class="form-label fw-bold small" style="color: #30473a;">
+                    Temporada recomendada
+                </label>
+                <select class="form-select py-2" id="temporada" name="temporada" required>
+                    <option value="Todo el año" selected>Todo el año</option>
+                    <option value="Verano">Verano</option>
+                    <option value="Otoño">Otoño</option>
+                    <option value="Invierno">Invierno</option>
+                    <option value="Primavera">Primavera</option>
+                </select>
+            </div>
+
+            <!-- Imagen -->
             <div class="mb-3">
                 <label for="imagen" class="form-label fw-bold small" style="color: #30473a;">
                     Imagen del alojamiento
@@ -69,7 +91,7 @@
                 >
             </div>
 
-            <!-- descripcion -->
+            <!-- descripción -->
             <div class="mb-4">
                 <label for="descripcion" class="form-label fw-bold small" style="color: #30473a;">
                     Descripción
@@ -77,6 +99,7 @@
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describí el alojamiento y sus servicios"></textarea>
             </div>
 
+            <!-- botones -->
             <div class="d-flex gap-2 pt-2">
                 <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #286b46;">
                     Guardar alojamiento

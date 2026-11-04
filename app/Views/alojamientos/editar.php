@@ -1,11 +1,11 @@
 <?php
-    $seccion = 'actividades';
+    $seccion = 'alojamientos';
     include(APPPATH . 'Views/template/header.php');
 ?>
 
 <main class="container my-5 px-3 px-md-4" style="max-width: 760px;">
 
-    <!-- tarheta del form -->
+    <!-- card -->
     <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
 
         <h2 class="display-6 fw-bold mb-1" style="font-family: Georgia, serif; color: #174d3c;">
@@ -34,7 +34,7 @@
                 >
             </div>
 
-            <!-- tipo de alojamiento -->
+            <!-- categoría de alojamiento -->
             <div class="mb-3">
                 <label for="tipo" class="form-label fw-bold small" style="color: #30473a;">
                     Tipo de alojamiento
@@ -66,21 +66,57 @@
                 >
             </div>
 
-            <!-- precio -->
+            <!-- div precios y cupos-->
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
+                        Precio por noche ($)
+                    </label>
+                    <input 
+                        type="number" 
+                        class="form-control py-2" 
+                        id="precios" 
+                        name="precios" 
+                        min="0" 
+                        step="0.01" 
+                        value="<?= esc($alojamiento['precios']) ?>" 
+                        required
+                    >
+                </div>
+                <div class="col-md-6">
+                    <label for="cupos" class="form-label fw-bold small" style="color: #30473a;">
+                        Cupos disponibles
+                    </label>
+                    <input 
+                        type="number" 
+                        class="form-control py-2" 
+                        id="cupos" 
+                        name="cupos" 
+                        min= "<?= esc($alojamiento['cupos']) ?>"
+                        step="1" 
+                        value="<?= esc($alojamiento['cupos'] ?? 0) ?>" 
+                        oninput="if(this.value < 0) this.value = <?= esc($alojamiento['cupos']) ?>;"
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- temporada recomendada -->
             <div class="mb-3">
-                <label for="precios" class="form-label fw-bold small" style="color: #30473a;">
-                    Precio por noche ($)
+                <label for="temporada" class="form-label fw-bold small" style="color: #30473a;">
+                    Temporada recomendada
                 </label>
-                <input 
-                    type="number" 
-                    class="form-control py-2" 
-                    id="precios" 
-                    name="precios" 
-                    min="0" 
-                    step="0.01" 
-                    value="<?= esc($alojamiento['precios']) ?>" 
-                    required
-                >
+                <select class="form-select py-2" id="temporada" name="temporada" required>
+                    <?php 
+                    $temporadas = ['Verano', 'Otoño', 'Invierno', 'Primavera', 'Todo el año'];
+                    $temporadaActual = $alojamiento['temporada'] ?? 'Todo el año';
+                    foreach ($temporadas as $tempOption): 
+                    ?>
+                        <option value="<?= $tempOption ?>" <?= ($temporadaActual === $tempOption) ? 'selected' : '' ?>>
+                            <?= $tempOption ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
             <!-- imagen -->
@@ -89,7 +125,7 @@
                     Imagen del alojamiento
                 </label>
 
-                <!-- Muestra vista previa si ya existe una imagen -->
+                <!-- imagen que tenía el alojamiento -->
                 <?php if (!empty($alojamiento['imagen']) && file_exists(FCPATH . 'img/alojamientos/' . $alojamiento['imagen'])): ?>
                     <div class="mb-2 d-flex align-items-center gap-3 p-2 bg-light rounded-3 border">
                         <img 
@@ -116,7 +152,7 @@
                 </div>
             </div>
 
-            <!-- descripcion -->
+            <!-- descripción -->
             <div class="mb-4">
                 <label for="descripcion" class="form-label fw-bold small" style="color: #30473a;">
                     Descripción

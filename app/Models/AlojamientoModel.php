@@ -15,6 +15,9 @@ class AlojamientoModel extends Model
         'ubicacion',
         'precios',
         'imagen',
-        'descripcion'
+        'descripcion',
+        'cupos',
+        'estado',
+        'temporada'
     ];
 }

@@ -28,65 +28,64 @@
                     </a>
                 </div>
 
-                <!-- columna centraal -->
-                <div class="col-xl-7 mb-3 mb-xl-0 d-flex justify-content-center">
-                    <nav class="d-flex gap-3 gap-xxl-4 flex-wrap justify-content-center">
-        
-                        <?php if (session()->get('rol') === 'admin'): ?>
-                            <a href="<?= base_url('actividades/crear') ?>" class="nav-link-custom <?php if ($seccion == 'actividad'): ?>active<?php endif; ?>">
-                                Agregar actividad
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= base_url('/') ?>" class="nav-link-custom <?php if ($seccion == 'inicio'): ?>active<?php endif; ?>">
-                                Página Principal
-                            </a>
-                        <?php endif; ?>
+<div class="col-xl-7 mb-3 mb-xl-0 d-flex justify-content-center">
+    <nav class="d-flex gap-3 gap-xxl-4 flex-wrap justify-content-center align-items-center">
 
-                        <?php if (session()->get('rol') === 'admin'): ?>
-                            <a href="<?= base_url('actividades') ?>" class="nav-link-custom <?php if ($seccion == 'actividad'): ?>active<?php endif; ?>">
-                                Administrar actividades
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= base_url('atractivos') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
-                                Destinos y Atractivos
-                            </a>
-                        <?php endif; ?>
+        <?php if (session()->get('rol') === 'admin'): ?>
 
-                        <?php if (session()->get('rol') === 'admin'): ?>
-                            <a href="<?= base_url('alojamientos/crear') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
-                                Agregar alojamientos
-                            </a>
-                            
-                        <?php else: ?>
-                            <a href="<?= base_url('experiencias') ?>" class="nav-link-custom <?php if ($seccion == 'experiencias'): ?>active<?php endif; ?>">
-                                Gastronomía y Aventura
-                            </a>
-                        <?php endif; ?>
+            <a href="<?= base_url('actividades/crear') ?>" class="nav-link-custom">
+                Agregar actividad
+            </a>
 
-                        <?php if (session()->get('rol') === 'admin'): ?>
-                            <a href="<?= base_url('alojamientos') ?>" class="nav-link-custom <?php if ($seccion == 'atractivos'): ?>active<?php endif; ?>">
-                                Administrar alojamientos
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= base_url('sobre-misiones') ?>" class="nav-link-custom <?php if ($seccion == 'sobre_misiones'): ?>active<?php endif; ?>">
-                                Cultura y Geografía
-                            </a>
-                        <?php endif; ?>
+            <a href="<?= base_url('actividades') ?>" class="nav-link-custom">
+                Administrar actividades
+            </a>
 
-                        <?php if (session()->get('rol') === 'admin'): ?>
-                            <a href="<?= base_url('reservas') ?>" class="nav-link-custom <?php if ($seccion == 'experiencias'): ?>active<?php endif; ?>">
-                                Administrar reservas
-                            </a>
-                        <?php else: ?>
-                            <a href="<?= base_url('info-practica') ?>" class="nav-link-custom <?php if ($seccion == 'info_practica'): ?>active<?php endif; ?>">
-                                Guía al Viajero
-                            </a>
-                        <?php endif; ?>
+            <a href="<?= base_url('alojamientos/crear') ?>" class="nav-link-custom">
+                Agregar alojamientos
+            </a>
 
-                    </nav>
-                </div>
+            <a href="<?= base_url('alojamientos') ?>" class="nav-link-custom">
+                Administrar alojamientos
+            </a>
 
-                <!-- columna derecha -->
+            <a href="<?= base_url('reservas') ?>" class="nav-link-custom">
+                Administrar reservas
+            </a>
+
+            <a href="<?= base_url('usuarios') ?>" class="nav-link-custom">
+            Usuarios
+            </a>
+
+        <?php else: ?>
+
+            <a href="<?= base_url('/') ?>" class="nav-link-custom">
+                Página Principal
+            </a>
+
+            <a href="<?= base_url('atractivos') ?>" class="nav-link-custom">
+                Destinos y Atractivos
+            </a>
+
+            <a href="<?= base_url('experiencias') ?>" class="nav-link-custom">
+                Gastronomía y Aventura
+            </a>
+
+            <a href="<?= base_url('sobre-misiones') ?>" class="nav-link-custom">
+                Cultura y Geografía
+            </a>
+
+            <a href="<?= base_url('info-practica') ?>" class="nav-link-custom">
+                Guía al Viajero
+            </a>
+
+        <?php endif; ?>
+
+    </nav>
+</div>
+
+
+          
                 <div class="col-xl-2 d-flex justify-content-center justify-content-xl-end">
                     <?php if (session()->get('logueado')): ?>
         
@@ -122,15 +121,18 @@
                 </li>
 <?php endif; ?>
 
-                                <!-- Opción exclusiva para Administrador -->
-                                <?php if (session()->get('rol') === 'admin'): ?>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-2 text-success fw-bold" href="<?= base_url('actividades/crear') ?>">
-                                            <i class="bi bi-plus-circle"></i> + Nueva Actividad
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
+                          <!-- Opciones exclusivas para Administrador -->
+        <?php if (session()->get('rol') === 'admin'): ?>
+            <li><hr class="dropdown-divider"></li>
+
+
+
+    <li>
+        <a class="dropdown-item d-flex align-items-center gap-2 text-success fw-bold" href="<?= base_url('actividades/crear') ?>">
+            <i class="bi bi-plus-circle"></i> Nueva actividad
+        </a>
+    </li>
+<?php endif; ?>
 
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

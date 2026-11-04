@@ -32,7 +32,7 @@ $routes->post('actividades/procesarReserva', 'ActividadController::procesarReser
 $routes->get('reservas', 'ReservaController::index', ['filter' => 'auth']);
 $routes->get('reservas/crear/(:num)', 'ReservaController::crear/$1', ['filter' => 'auth']);
 $routes->post('reservas/guardar', 'ReservaController::guardar', ['filter' => 'auth']);
-$routes->post('reservas/eliminar/(:num)', 'ReservaController::eliminar/$1', ['filter' => 'auth']);
+$routes->post('reservas/devolver/(:num)', 'ReservaController::devolver/$1', ['filter' => 'auth']);
 
 $routes->get('alojamientos', 'AlojamientoController::index', ['filter' => 'auth']);
 $routes->get('alojamientos/crear', 'AlojamientoController::crear', ['filter' => 'adminAuth']);

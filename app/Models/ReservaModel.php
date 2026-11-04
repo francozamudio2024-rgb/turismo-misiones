@@ -14,6 +14,7 @@ class ReservaModel extends Model
         'actividad_id',
         'cantidad',
         'fecha',
-        'total'
+        'total',
+        'devuelto'
     ];
 }

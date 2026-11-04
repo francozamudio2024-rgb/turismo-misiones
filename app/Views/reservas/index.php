@@ -1,5 +1,4 @@
-```php
-<?= $this->include('template/header') ?>
+<?php include(APPPATH . 'Views/template/header.php'); ?>
 
 <style>
     .reservas-contenedor {
@@ -55,7 +54,7 @@
         color: #174d3c;
     }
 
-    .btn-cancelar-reserva {
+    .btn-devolver-reserva {
         background: #fff;
         color: #b02a37;
         border: 1px solid #b02a37;
@@ -64,7 +63,7 @@
         font-weight: 600;
     }
 
-    .btn-cancelar-reserva:hover {
+    .btn-devolver-reserva:hover {
         background: #b02a37;
         color: white;
     }
@@ -114,22 +113,18 @@
         <?php foreach ($reservas as $reserva): ?>
 
             <?php
-            $nombreActividad = 'Actividad #' . $reserva['actividad_id'];
-
-            foreach ($actividades as $actividad) {
-                if ((int) $actividad['id'] === (int) $reserva['actividad_id']) {
-                    $nombreActividad = $actividad['nombre'];
-                    break;
-                }
-            }
+            $nombreActividad = $reserva['nombre_actividad'] ?? 'Actividad eliminada';
 
             $fechaReserva = strtotime($reserva['fecha']);
-            $hoy = strtotime(date('Y-m-d'));
+            $fechaPasada = $fechaReserva <= time();
 
-            if ($fechaReserva < $hoy) {
+            if ((int) $reserva['devuelto'] === 1) {
+                $estado = 'Devuelto';
+                $colorEstado = 'danger';
+            } elseif ($fechaPasada) {
                 $estado = 'Finalizada';
                 $colorEstado = 'secondary';
-            } elseif ($fechaReserva <= strtotime('+7 days', $hoy)) {
+            } elseif ($fechaReserva <= strtotime('+7 days')) {
                 $estado = 'Próxima';
                 $colorEstado = 'success';
             } else {
@@ -179,16 +174,16 @@
 
                 </div>
 
-                <?php if ($estado !== 'Finalizada'): ?>
+                <?php if ((int) $reserva['devuelto'] === 0 && !$fechaPasada): ?>
                     <form
-                        action="<?= base_url('reservas/eliminar/' . $reserva['id']) ?>"
+                        action="<?= base_url('reservas/devolver/' . $reserva['id']) ?>"
                         method="post"
-                        onsubmit="return confirm('¿Estás seguro de que querés cancelar esta reserva?');"
+                        onsubmit="return confirm('¿Estás seguro de que querés devolver esta reserva? Se recuperarán los cupos.');"
                     >
                         <?= csrf_field() ?>
 
-                        <button type="submit" class="btn-cancelar-reserva">
-                            Cancelar reserva
+                        <button type="submit" class="btn-devolver-reserva">
+                            Devolver reserva
                         </button>
                     </form>
                 <?php endif; ?>
@@ -207,5 +202,4 @@
 
 </main>
 
-<?= $this->include('template/footer') ?>
-```
+<?php include(APPPATH . 'Views/template/footer.php'); ?>

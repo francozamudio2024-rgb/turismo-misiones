@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -16,7 +17,13 @@ class ActividadModel extends Model
         'precios',
         'imagen',
         'temporada',
+<<<<<<< HEAD
         'estado',
         'descripcion'
+=======
+        'descripcion',
+        'fecha_salida',
+        'hora_salida'
+>>>>>>> 3d73ad5 (modificacion de fecha y cupos)
     ];
 }
